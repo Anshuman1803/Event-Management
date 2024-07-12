@@ -1,0 +1,16 @@
+:root{
+  --mainBG : #F7F7FF;
+  --secondaryBG : #F5F6F7;
+  --primaryColor : #4169E1;
+  --secondaryColor : black;
+}
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Barlow", sans-serif;
+  user-select: none;
+}
+body{
+  background-color: var(--mainBG);
+}
