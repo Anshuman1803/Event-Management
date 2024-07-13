@@ -1,0 +1,133 @@
+.__organizerDashboardContainer {
+    width: 100vw;
+    height: 100dvh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.__DashboardContainer__sidebar {
+    border-right: 1px solid var(--primaryColor);
+    width: 275px;
+    height: 100%;
+    background-color: var(--secondaryBG);
+}
+
+.__outletcontainer {
+    width: calc(100% - 275px);
+    border: 2px solid blue;
+    height: 100%;
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+.__dashboardLOGO {
+    display: block;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    margin: 0px auto 10px auto;
+}
+
+.__dashboard_navbar {
+    border-top: 1px solid rgba(128, 128, 128, 0.338);
+    padding-top: 2em;
+    width: 100%;
+    height: fit-content;
+}
+
+.__navItems {
+    border: 1px solid var(--secondaryBG);
+    display: block;
+    margin: 15px auto;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 20px;
+    padding-left: 1em;
+    width: 95%;
+    text-decoration: none;
+    color: var(--secondaryColor);
+    border-radius: 5px;
+    transition: all 400ms ease-in;
+}
+
+.__navItemsICON {
+    font-size: 22px;
+
+}
+
+.__navItemsText {
+    font-size: 20px;
+    font-weight: 500;
+    transition: all 400ms ease-in;
+}
+
+.__navItems:hover {
+    border: 1px solid rgba(128, 128, 128, 0.408);
+    cursor: pointer;
+    color: var(--primaryColor);
+    background-color: var(--mainBG);
+}
+
+.__navItems:hover .__navItemsText {
+    font-weight: 600;
+}
+
+.active {
+    border: 1px solid rgba(128, 128, 128, 0.408);
+    cursor: pointer;
+    color: var(--primaryColor);
+    background-color: var(--mainBG);
+}
+
+.__logoutButton {
+    border: none;
+    outline: none;
+    width: 95%;
+    margin: 3em auto 0em auto;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 1em;
+    gap: 10px;
+    background-color: var(--primaryColor);
+    color: var(--mainBG);
+    border-radius: 5px;
+    font-size: 20px;
+    transition: all 400ms ease-in-out;
+}
+
+.__logoutButton:hover {
+    cursor: pointer;
+    background-color: #284dbe;
+}
+
+@media screen and (max-width: 801px) {
+    .__DashboardContainer__sidebar {
+        width: 80px;
+    }
+    .__dashboardLOGO {
+        width: 70px;
+        height: 70px;
+    }
+    .__outletcontainer {
+        width: calc(100% - 80px);
+    }
+    .__navItems,.__logoutButton {
+        padding: 0;
+        justify-content: center;
+        width: 80%;
+    }
+
+    .__navItemsText {
+        display: none;
+    }
+    .__navItemsICON{
+        font-size: 26px;
+    }
+
+}
