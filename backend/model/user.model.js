@@ -1,11 +1,5 @@
 const mongoose = require("mongoose");
-const UserSchema = new mongoose.Schema({
-    username: {
-        type: String,
-        required: true,
-        unique: true,
-        trim: true
-    },
+const UserSchema = mongoose.Schema({
     email: {
         type: String,
         required: true,
@@ -21,28 +15,34 @@ const UserSchema = new mongoose.Schema({
         type: String,
         trim: true
     },
-    profilePicture: {
+    profile: {
         type: String
     },
     socialLogins: {
         google: String,
         facebook: String
     },
+    token: {
+        type: String
+    },
     role: {
         type: String,
-        enum: ['attendee', 'organizer', 'admin'],
-        default: 'attendee'
+        enum: ['audience', 'organizer'],
+        default: 'audience'
     },
     createdEvents: [{
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
+        _id: { type: mongoose.Schema.Types.ObjectId, auto: false },
         ref: 'Event'
     }],
     attendedEvents: [{
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
+        _id: { type: mongoose.Schema.Types.ObjectId, auto: false },
         ref: 'Event'
     }],
     registeredEvents: [{
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
+        _id: { type: mongoose.Schema.Types.ObjectId, auto: false },
         ref: 'Event'
     }],
     createdAt: {

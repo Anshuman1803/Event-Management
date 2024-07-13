@@ -2,11 +2,13 @@ import React from 'react'
 import headerStyle from "./header.module.css"
 import LOGO from "../../assets/LOGO.png"
 import { Link, NavLink, useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useSelector,useDispatch } from 'react-redux'
 import { GiHamburgerMenu } from "react-icons/gi";
+import { UserLoggedOut } from '../../redux/ReduxSlice'
 
 export function Header() {
-  const { isActive, profile } = useSelector((state) => state.EventManagement);
+  const dispatchTO = useDispatch();
+  const { isActive, profile, fullName } = useSelector((state) => state.EventManagement);
   const navigateTO = useNavigate();
   const handleProfileClick = (e) => {
     const ActiveUserPOPUP = document.querySelector(`.${headerStyle.__activeUser_POPUP}`);
@@ -14,6 +16,11 @@ export function Header() {
   }
   const handleNavigateTO = (e) => {
     navigateTO('/user/login')
+  }
+  const handleLogOutClick = (e) => {
+    dispatchTO(UserLoggedOut());
+    navigateTO('/user/login');
+    handleProfileClick();
   }
   return (
     <header className={`${headerStyle.__appHeader}`}>
@@ -29,15 +36,15 @@ export function Header() {
         {
           isActive ? <>
             {
-              profile ? <img onClick={handleProfileClick} src='https://res.cloudinary.com/project-instagram-clone/image/upload/v1720172954/r8qkwub4r4yoays3mxgy.jpg' alt='userProfile' className={`${headerStyle.__userProfile}`} /> : <p onClick={handleProfileClick} className={`${headerStyle.__userInitialLetter}`}>
-                U
+              profile ? <img onClick={handleProfileClick} src={profile} alt='userProfile' className={`${headerStyle.__userProfile}`} /> : <p onClick={handleProfileClick} className={`${headerStyle.__userInitialLetter}`}>
+                {fullName[0]}
               </p>
             }
 
             <div className={`${headerStyle.__activeUser_POPUP} ${headerStyle.__UnactivePOPUP}`}>
               <Link onClick={handleProfileClick} className={`${headerStyle.__activeUser_POPUP_ITEM}`}>Dashboard</Link>
               <Link onClick={handleProfileClick} className={`${headerStyle.__activeUser_POPUP_ITEM}`}>Setting</Link>
-              <button onClick={handleProfileClick} className={`${headerStyle.__activeUser_POPUP_LogoutButton}`}>Log out</button>
+              <button onClick={handleLogOutClick} className={`${headerStyle.__activeUser_POPUP_LogoutButton}`}>Log out</button>
 
             </div>
           </> : <>
@@ -45,7 +52,7 @@ export function Header() {
           </>
         }
       </nav>
-<button type='button' className={`${headerStyle.__hamButton}`}><GiHamburgerMenu /></button>
+      <button type='button' className={`${headerStyle.__hamButton}`}><GiHamburgerMenu /></button>
     </header>
   )
 }

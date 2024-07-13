@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import styles from './auth.module.css';
-import { Link } from 'react-router-dom';
-
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios'
+import toast from 'react-hot-toast';
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const Register = () => {
+  const navigateTO= useNavigate()
   const [showPassword, setShowPassword] = useState(false);
   const [userDetails, setUserDetails] = useState({
     email: "",
-    userName: "",
     fullName: "",
     password: "",
-    showPassword: "",
     role: "audience",
   })
 
@@ -26,6 +27,32 @@ const Register = () => {
   // ! Register logic
   const handleSubmit = (e) => {
     e.preventDefault();
+    axios.post(`${BACKEND_URL}auth/user/register`,userDetails).then((response)=>{
+      if(response.data.success){
+        toast.success(response.data.resMsg);
+        navigateTO("/user/login")
+        setUserDetails({
+          email: "",
+          fullName: "",
+          password: "",
+          role: "audience",
+        });
+      }else{
+        toast.error(response.data.resMsg);
+      }
+    }).catch((error)=>{
+      if (error.response) {
+        if (error.response.status === 409) {
+          toast(error.response.data.resMsg, {
+            icon: '❗',
+          });
+        } else if (error.response.status === 500) {
+          toast.error(error.response.data.resMsg);
+        } else {
+          toast.error('An unexpected error occurred. Please try again later.');
+        }
+      }
+    })
     // Handle registration logic here
   };
 
@@ -70,26 +97,12 @@ const Register = () => {
           <label htmlFor="email" className={styles.label}>Email:</label>
           <input
             type="email"
-            autoComplete='off'
             id="email"
             name='email'
             className={styles.input}
             value={userDetails.email}
             onChange={handleInputOnchange}
-            required
-          />
-        </div>
-
-        <div className={styles.inputGroup}>
-          <label htmlFor="userName" className={styles.label}>Username:</label>
-          <input
-            type="text"
             autoComplete='off'
-            id="userName"
-            name='userName'
-            className={styles.input}
-            value={userDetails.userName}
-            onChange={handleInputOnchange}
             required
           />
         </div>
@@ -113,11 +126,11 @@ const Register = () => {
           <div className={styles.passwordWrapper}>
             <input
               type={showPassword ? "text" : "password"}
-              autoComplete='off'
               id="password"
-              name='password'
               className={styles.input}
+              name='password'
               value={userDetails.password}
+              autoComplete='off'
               onChange={handleInputOnchange}
               required
             />
