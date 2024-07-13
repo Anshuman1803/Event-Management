@@ -7,6 +7,9 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 5;
 }
 
 .__appHeader_LOGOContainer {
@@ -32,6 +35,22 @@
     object-fit: contain;
     object-position: center;
     scale: 1.2;
+}
+
+.__hamButton {
+    border: none;
+    outline: none;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+    border-radius: 5px;
+    font-size: 20px;
+    padding: 0.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    color: var(--primaryColor);
+    cursor: pointer;
+    display: none;
 }
 
 /*! Navbar */
@@ -199,10 +218,12 @@
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
 }
-.__UnactivePOPUP{
+
+.__UnactivePOPUP {
     display: none;
 }
-.__activeUser_POPUP_ITEM{
+
+.__activeUser_POPUP_ITEM {
     display: block;
     width: 100%;
     height: 50px;
@@ -214,13 +235,15 @@
     font-size: 16px;
     font-weight: 500;
 }
-.__activeUser_POPUP_ITEM:hover{
+
+.__activeUser_POPUP_ITEM:hover {
     background-color: #4169e116;
     cursor: pointer;
     color: var(--primaryColor);
     font-weight: 700;
 }
-.__activeUser_POPUP_LogoutButton{
+
+.__activeUser_POPUP_LogoutButton {
     border: none;
     outline: none;
     background-color: transparent;
@@ -233,7 +256,20 @@
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
 }
-.__activeUser_POPUP_LogoutButton:hover{
+
+.__activeUser_POPUP_LogoutButton:hover {
     cursor: pointer;
     background-color: #4169e116;
+}
+
+
+@media screen and (max-width: 769px) {
+    .__hamButton {
+        display: flex;
+    }
+
+    .__appNavbar {
+        display: none;
+    }
+
 }

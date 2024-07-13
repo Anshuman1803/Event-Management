@@ -1,0 +1,187 @@
+.formContainer {
+    width: 100%;
+    min-height: calc(100dvh - 90px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1em 0em;
+}
+
+.loginForm {
+    background-color: var(--secondaryBG);
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.title {
+    color: var(--primaryColor);
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+}
+
+.registerLink {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.registerLink a {
+    color: var(--primaryColor);
+    text-decoration: none;
+}
+
+.registerLink a:hover {
+    text-decoration: underline;
+}
+
+.radioGroup {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    margin: 1rem 0em;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.247);
+    padding: 1em 0em;
+}
+
+.radioLabel {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.radioInput {
+    margin-right: 0.5rem;
+}
+
+.inputGroup {
+    margin-bottom: 1rem;
+}
+
+.label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--secondaryColor);
+}
+
+.input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    outline: none;
+}
+.input:focus{
+    outline: 0.2px solid var(--secondaryColor);
+}
+.passwordWrapper {
+    position: relative;
+}
+
+.togglePassword {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--secondaryColor);
+    font-size: 0.9rem;
+}
+
+.submitButton {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: var(--primaryColor);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.submitButton:hover {
+    cursor: pointer;
+    background-color: #4169e1d9;
+}
+.unactive{
+    pointer-events: none;
+    background-color: #4169e1d9;
+    opacity: 0.7;
+}
+
+@media (max-width: 480px) {
+    .formContainer {
+        padding: 0.5rem;
+    }
+
+    .title {
+        font-size: 1.75rem;
+    }
+
+    .input {
+        font-size: 0.9rem;
+    }
+
+    .submitButton {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .title {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .input {
+        font-size: 0.85rem;
+        padding: 0.6rem;
+    }
+
+    .label {
+        font-size: 0.9rem;
+    }
+
+    .togglePassword {
+        font-size: 0.8rem;
+    }
+
+    .submitButton {
+        font-size: 0.85rem;
+        padding: 0.6rem;
+    }
+}
+
+@media (max-width: 320px) {
+    .title {
+        font-size: 1.3rem;
+    }
+
+    .input {
+        font-size: 0.8rem;
+        padding: 0.5rem;
+    }
+
+    .label {
+        font-size: 0.85rem;
+    }
+
+    .togglePassword {
+        font-size: 0.75rem;
+    }
+
+    .submitButton {
+        font-size: 0.8rem;
+        padding: 0.5rem;
+    }
+
+    .radioLabel {
+        margin-bottom: 0.5rem;
+    }
+}

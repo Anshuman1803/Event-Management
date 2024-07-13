@@ -3,6 +3,8 @@ import headerStyle from "./header.module.css"
 import LOGO from "../../assets/LOGO.png"
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import { GiHamburgerMenu } from "react-icons/gi";
+
 export function Header() {
   const { isActive, profile } = useSelector((state) => state.EventManagement);
   const navigateTO = useNavigate();
@@ -43,7 +45,7 @@ export function Header() {
           </>
         }
       </nav>
-
+<button type='button' className={`${headerStyle.__hamButton}`}><GiHamburgerMenu /></button>
     </header>
   )
 }
