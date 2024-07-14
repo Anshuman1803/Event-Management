@@ -3,9 +3,11 @@ import styles from './organizer.module.css';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import toast from "react-hot-toast"
+import ButtonLoader from "../../../components/buttonLoader/ButtonLoader"
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const CreateEvent = () => {
   const { userID } = useSelector((state) => state.EventManagement);
+  const [loading, setLoading] = useState(false);
   const [eventData, setEventData] = useState({
     organizer: userID,
     title: '',
@@ -42,16 +44,20 @@ const clearAllFields = ()=>{
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true)
     axios.post(`${BACKEND_URL}events/create-new-events`, eventData).then((response) => {
      if(response.data.success){
       toast.success(response.data.resMsg);
-      clearAllFields()
+      clearAllFields();
+      setLoading(false)
      }else{
       toast.error(response.data.resMsg);
       clearAllFields();
+      setLoading(false)
      }
     }).catch((error) => {
       clearAllFields();
+      setLoading(false)
       console.log(error)
     })
   };
@@ -176,7 +182,10 @@ const clearAllFields = ()=>{
         </div>
 
         <button type="submit" className={`${styles.submitButton}`}>
-          Create Event
+          {
+            loading ? <ButtonLoader/> : "Create Event"
+          }
+      
         </button>
       </form>
     </section>
