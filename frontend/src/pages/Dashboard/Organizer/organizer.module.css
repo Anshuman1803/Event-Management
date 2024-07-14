@@ -107,14 +107,14 @@
 }
 
 /* !Dashboard Profile Section */
-.__profileContainer{
+.__profileContainer {
     border: 2px solid red;
     width: 100%;
     min-height: 100%;
     padding: 1em;
 }
 
-.__statsBox{
+.__statsBox {
     width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(275px, 275px));
@@ -122,7 +122,8 @@
     justify-content: center;
     gap: 20px;
 }
-.__StatsCard{
+
+.__StatsCard {
     border-radius: 5px;
     box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
     width: 100%;
@@ -133,12 +134,14 @@
     justify-content: center;
     gap: 10px;
 }
-.__StatsCard_ICON{
+
+.__StatsCard_ICON {
     font-size: 40px;
     color: var(--primaryColor);
 
 }
-.__StatsCard_title{
+
+.__StatsCard_title {
     font-size: 20px;
     font-weight: 600;
     color: var(--secondaryColor);
@@ -147,25 +150,119 @@
     text-align: center;
 
 }
-.__StatsCard_stats{
+
+.__StatsCard_stats {
     width: 100%;
     text-align: center;
     font-size: 25px;
     color: var(--primaryColor);
 
 }
+
+
+/*! Create Events */
+.container {
+    width: 100%;
+    padding: 2em 0em;
+}
+
+.title {
+    color: var(--primaryColor);
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 33px;
+}
+
+.form {
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    margin: 0px auto;
+}
+
+
+.fieldGroup {
+    margin-bottom: 15px;
+}
+
+.label {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--secondaryColor);
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.input,
+.textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.textarea {
+    height: 100px;
+    resize: vertical;
+}
+.input:focus,
+.textarea:focus{
+    outline: 0.3px solid grey;
+}
+
+.checkboxLabel {
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.checkbox {
+    margin-right: 10px;
+}
+
+.submitButton {
+    background-color: var(--primaryColor);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submitButton:hover {
+    cursor: pointer;
+    background-color: #284dbe;
+}
+
+.submitButton:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+
 @media screen and (max-width: 801px) {
     .__DashboardContainer__sidebar {
         width: 80px;
     }
+
     .__dashboardLOGO {
         width: 70px;
         height: 70px;
     }
+
     .__outletcontainer {
         width: calc(100% - 80px);
     }
-    .__navItems,.__logoutButton {
+
+    .__navItems,
+    .__logoutButton {
         padding: 0;
         justify-content: center;
         width: 80%;
@@ -174,14 +271,27 @@
     .__navItemsText {
         display: none;
     }
-    .__navItemsICON{
+
+    .__navItemsICON {
         font-size: 26px;
     }
 
 }
 
-@media screen and (max-width: 686px){
-    .__statsBox{
+@media screen and (max-width: 686px) {
+    .__statsBox {
         grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 15px;
+    }
+
+    .input,
+    .textarea,
+    .submitButton {
+        font-size: 14px;
     }
 }

@@ -4,12 +4,14 @@ const appServer = express();
 const dotENV = require("dotenv");
 const { mongooseConnection } = require("./config/mongooseConnection");
 const { authRoute } = require("./routes/auth.routes");
+const { eventRoute } = require("./routes/event.route");
 
 dotENV.config();
 appServer.use(express.json());
 appServer.use(cors({ origin: "*",}));
 
 appServer.use("/api/eventmanagement/v1/auth", authRoute)
+appServer.use("/api/eventmanagement/v1/events", eventRoute)
 
 
 appServer.listen(5000, async () => {

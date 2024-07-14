@@ -29,9 +29,6 @@ const userRegister = async (request, response) => {
             role: role,
             password: password,
             profile: "",
-            createdEvents: [],
-            attendedEvents: [],
-            registeredEvents: [],
         });
         if (registredResult) {
             return response.status(201).json({ success: true, resMsg: "User Registred Successfully" });

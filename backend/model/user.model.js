@@ -30,11 +30,6 @@ const UserSchema = mongoose.Schema({
         enum: ['audience', 'organizer'],
         default: 'audience'
     },
-    createdEvents: [{
-        type: mongoose.Schema.Types.ObjectId,
-        _id: { type: mongoose.Schema.Types.ObjectId, auto: false },
-        ref: 'Event'
-    }],
     attendedEvents: [{
         type: mongoose.Schema.Types.ObjectId,
         _id: { type: mongoose.Schema.Types.ObjectId, auto: false },
