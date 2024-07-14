@@ -39,6 +39,8 @@ function Organizer() {
                 <Route path='/all-events' element={<Suspense fallback={<div>Loading...</div>}> <AllEvent /> </Suspense>} />
 
                 <Route path='/setting' element={<Suspense fallback={<div>Loading...</div>}> <Setting /> </Suspense>} />
+                
+                {/* <Route path='/event/:id' element={<Suspense fallback={<div>Loading...</div>}> <EventDetails /> </Suspense>} /> */}
 
                 <Route path='/*' index={1} element={<Suspense fallback={<div>Loading...</div>}> <Profile /> </Suspense>} />
 

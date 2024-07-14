@@ -19,6 +19,7 @@
     height: 100%;
     overflow: hidden;
     overflow-y: auto;
+    position: relative;
 }
 
 .__dashboardLOGO {
@@ -108,7 +109,6 @@
 
 /* !Dashboard Profile Section */
 .__profileContainer {
-    border: 2px solid red;
     width: 100%;
     min-height: 100%;
     padding: 1em;
@@ -209,8 +209,9 @@
     height: 100px;
     resize: vertical;
 }
+
 .input:focus,
-.textarea:focus{
+.textarea:focus {
     outline: 0.3px solid grey;
 }
 
@@ -246,6 +247,95 @@
     cursor: not-allowed;
 }
 
+/*! All Events Sections  */
+.__allEventsContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(375px, 375px));
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 1em 0.6em;
+}
+
+.__eventsCard {
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+    position: relative;
+}
+
+.__eventsCard:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.title {
+    color: var(--primaryColor);
+    margin-bottom: 10px;
+    font-size: 1.2em;
+}
+
+.date {
+    margin-top: 2.5em;
+}
+
+.date,
+.location {
+    color: var(--secondaryColor);
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+    align-items: center;
+}
+
+.description {
+    color: var(--secondaryColor);
+    margin-bottom: 15px;
+    font-size: 0.9em;
+    margin: 20px auto;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.price {
+    font-weight: bold;
+    color: var(--primaryColor);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-weight: 800;
+}
+
+.statsICON {
+    font-size: 18px;
+    color: var(--primaryColor);
+}
+
+.availability {
+    font-size: 0.9em;
+    font-weight: 500;
+    color: var(--secondaryColor);
+}
+
+.privateTag {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: var(--primaryColor);
+    color: white;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.8em;
+}
 
 @media screen and (max-width: 801px) {
     .__DashboardContainer__sidebar {
@@ -293,5 +383,19 @@
     .textarea,
     .submitButton {
         font-size: 14px;
+    }
+
+    .card {
+        padding: 15px;
+    }
+
+    .title {
+        font-size: 1.1em;
+    }
+
+    .date,
+    .location,
+    .description {
+        font-size: 0.8em;
     }
 }

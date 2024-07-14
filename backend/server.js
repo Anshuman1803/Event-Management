@@ -4,7 +4,7 @@ const appServer = express();
 const dotENV = require("dotenv");
 const { mongooseConnection } = require("./config/mongooseConnection");
 const { authRoute } = require("./routes/auth.routes");
-const { eventRoute } = require("./routes/event.route");
+const { eventRoute } = require("./routes/event.routes");
 
 dotENV.config();
 appServer.use(express.json());

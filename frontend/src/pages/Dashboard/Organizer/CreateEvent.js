@@ -1,8 +1,8 @@
-//  CreateEvent
 import React, { useState } from 'react';
 import styles from './organizer.module.css';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
+import toast from "react-hot-toast"
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const CreateEvent = () => {
   const { userID } = useSelector((state) => state.EventManagement);
@@ -16,7 +16,21 @@ const CreateEvent = () => {
     ticketPrice: '',
     ticketQuantity: '',
     isPrivate: false,
+    createdAt : Date.now(),
   });
+const clearAllFields = ()=>{
+  setEventData({
+    organizer: userID,
+    title: '',
+    description: '',
+    date: '',
+    time: '',
+    location: '',
+    ticketPrice: '',
+    ticketQuantity: '',
+    isPrivate: false,
+  })
+}
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -29,8 +43,15 @@ const CreateEvent = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios.post(`${BACKEND_URL}events/create-new-events`, eventData).then((response) => {
-      console.log(response)
+     if(response.data.success){
+      toast.success(response.data.resMsg);
+      clearAllFields()
+     }else{
+      toast.error(response.data.resMsg);
+      clearAllFields();
+     }
     }).catch((error) => {
+      clearAllFields();
       console.log(error)
     })
   };
