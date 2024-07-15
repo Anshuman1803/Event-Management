@@ -1,6 +1,7 @@
 import React, { lazy, Suspense } from 'react';
 import { Routes, Route } from "react-router-dom"
 import { useSelector } from 'react-redux';
+import LazyLoader from '../components/LazyLoader/LazyLoader.js';
 
 //! Auth components
 const Login = lazy(() => import("../pages/Auth/Login.js"));
@@ -38,18 +39,18 @@ export default AppRouter
 function Organizer() {
     return (
         <Routes>
-            <Route path='/' element={<Suspense fallback={<div>Loading...</div>}> <OrganizerDashboard /> </Suspense>}>
-                <Route path='/profile' index={1} element={<Suspense fallback={<div>Loading...</div>}> <Profile /> </Suspense>} />
+            <Route path='/' element={<Suspense fallback={<LazyLoader/>}> <OrganizerDashboard /> </Suspense>}>
+                <Route path='/profile' index={1} element={<Suspense fallback={<LazyLoader/>}> <Profile /> </Suspense>} />
 
-                <Route path='/create-events' element={<Suspense fallback={<div>Loading...</div>}> <CreateEvent /> </Suspense>} />
+                <Route path='/create-events' element={<Suspense fallback={<LazyLoader/>}> <CreateEvent /> </Suspense>} />
 
-                <Route path='/all-events' element={<Suspense fallback={<div>Loading...</div>}> <AllEvent /> </Suspense>} />
+                <Route path='/all-events' element={<Suspense fallback={<LazyLoader/>}> <AllEvent /> </Suspense>} />
 
-                <Route path='/setting' element={<Suspense fallback={<div>Loading...</div>}> <Setting /> </Suspense>} />
+                <Route path='/setting' element={<Suspense fallback={<LazyLoader/>}> <Setting /> </Suspense>} />
 
-                {/* <Route path='/event/:id' element={<Suspense fallback={<div>Loading...</div>}> <EventDetails /> </Suspense>} /> */}
+                {/* <Route path='/event/:id' element={<Suspense fallback={<LazyLoader/>}> <EventDetails /> </Suspense>} /> */}
 
-                <Route path='/*' index={1} element={<Suspense fallback={<div>Loading...</div>}> <Profile /> </Suspense>} />
+                <Route path='/*' index={1} element={<Suspense fallback={<LazyLoader/>}> <Profile /> </Suspense>} />
 
             </Route>
 
@@ -60,10 +61,10 @@ function Organizer() {
 function Audience() {
     return (
         <Routes>
-            <Route path='/' element={<Suspense fallback={<div>Loading...</div>}> <Events /> </Suspense>} />
+            <Route path='/' element={<Suspense fallback={<LazyLoader/>}> <Events /> </Suspense>} />
 
 
-            <Route path='/*' element={<Suspense fallback={<div>Loading...</div>}> <Events /> </Suspense>} />
+            <Route path='/*' element={<Suspense fallback={<LazyLoader/>}> <Events /> </Suspense>} />
 
         </Routes>
     )
@@ -71,8 +72,8 @@ function Audience() {
 
 function AuthRoute() {
     return <Routes>
-        <Route path='/user/login' element={<Suspense fallback={<div>Loading...</div>}> <Login /> </Suspense>} />
-        <Route path='/user/register' element={<Suspense fallback={<div>Loading...</div>}> <Register /> </Suspense>} />
-        <Route path='/' element={<Suspense fallback={<div>Loading...</div>}> <Login /> </Suspense>} />
+        <Route path='/user/login' element={<Suspense fallback={<LazyLoader/>}> <Login /> </Suspense>} />
+        <Route path='/user/register' element={<Suspense fallback={<LazyLoader/>}> <Register /> </Suspense>} />
+        <Route path='/' element={<Suspense fallback={<LazyLoader/>}> <Login /> </Suspense>} />
     </Routes>
 }
