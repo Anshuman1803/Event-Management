@@ -82,189 +82,61 @@
     border-top: 2px solid var(--primaryColor);
     content: "";
     position: absolute;
-    top: 0;
+    bottom: 0;
     left: 50%;
     transform: translateX(-50%);
     width: 20px;
     transition: all 400ms ease-in;
     z-index: -1;
     border-radius: 5px;
+    display: none;
 }
 
 .__NavItems:hover::after {
-    background-color: var(--primaryColor);
-    height: 100%;
-    width: 100%;
-    border: none;
     animation: hoverTransition 400ms ease-out;
+    display: block;
 }
 
 .__NavItems:hover {
     cursor: pointer;
-    color: var(--mainBG);
-    font-weight: 500;
-}
-
-@keyframes hoverTransition {
-    0% {
-        height: 0;
-        width: 100%;
-    }
-
-    100% {
-        width: 100%;
-        height: 100%;
-    }
+    color: var(--primaryColor);
+    font-weight: 600;
 }
 
 .active {
-    background-color: var(--primaryColor);
-    color: var(--mainBG);
+    color: var(--primaryColor);
     border-radius: 5px;
-
+    font-weight: 700;
 }
-
-.__NavItems_Buttons {
-    border: none;
-    border: 1px solid var(--primaryColor);
-    background-color: transparent;
-    outline: noen;
-    border-radius: 5px;
-    width: 125px;
-    padding: 0.6em;
-    font-size: 16px;
-    font-weight: 500;
-    text-transform: capitalize;
-    transition: all 400ms ease-in-out;
-    position: relative;
-    z-index: 2;
-    overflow: hidden;
-}
-
-.__NavItems_Buttons::after {
-    border-radius: 5px;
-    content: "";
-    background-color: var(--primaryColor);
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    animation: hoverTransition 400ms ease-in;
-    transition: all 400ms ease-in-out;
-    z-index: -1;
-    display: none;
-}
-
-.__NavItems_Buttons:hover {
-    border: none;
-    cursor: pointer;
-    color: var(--mainBG);
-}
-
-.__NavItems_Buttons:hover::after {
-    background-color: var(--primaryColor);
-    height: 100%;
-    border: none;
-    animation: ButtonhoverTransition 400ms ease-in;
-    transition: all 400ms ease-in-out;
+.active:after {
     display: block;
 }
 
-@keyframes ButtonhoverTransition {
-    0% {
-        height: 0px;
-    }
-
-    100% {
-        height: 100%;
-    }
-}
-
-.__userInitialLetter {
-    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
+.__logoutButton{
+    outline: none;
+    border: 1px solid rgba(128, 128, 128, 0.33);
+    width: 120px;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 0.6em;
+    border-radius: 5px;
+    background-color: var(--primaryColor);
+    transition: all 400ms ease-in-out;
+    color: var(--mainBG);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 24px;
-    font-weight: 600;
-    text-transform: uppercase;
-    background-color: var(--mainBG);
-    color: var(--primaryColor);
+    gap: 5px;
 }
-
-.__userInitialLetter:hover {
+.__logoutICON{
+    font-size: 20px;
+}
+.__logoutButton:hover{
     cursor: pointer;
-    background-color: #4169e129;
+    background-color: #1f42ad;
 }
 
-.__userProfile {
-    width: 45px;
-    height: 45px;
-    cursor: pointer;
-    border-radius: 50%;
-}
-
-.__activeUser_POPUP {
-    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
-    position: absolute;
-    top: 100%;
-    right: 15px;
-    width: 300px;
-    height: fit-content;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    background-color: var(--mainBG);
-}
-
-.__UnactivePOPUP {
-    display: none;
-}
-
-.__activeUser_POPUP_ITEM {
-    display: block;
-    width: 100%;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 0em 1em;
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: 500;
-}
-
-.__activeUser_POPUP_ITEM:hover {
-    background-color: #4169e116;
-    cursor: pointer;
-    color: var(--primaryColor);
-    font-weight: 700;
-}
-
-.__activeUser_POPUP_LogoutButton {
-    border: none;
-    outline: none;
-    background-color: transparent;
-    width: 100%;
-    height: 60px;
-    font-weight: 600;
-    font-size: 18px;
-    border-top: 1px solid var(--primaryColor);
-    color: var(--primaryColor);
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-}
-
-.__activeUser_POPUP_LogoutButton:hover {
-    cursor: pointer;
-    background-color: #4169e116;
-}
-
-
-@media screen and (max-width: 769px) {
+@media screen and (max-width: 650px) {
     .__hamButton {
         display: flex;
     }
