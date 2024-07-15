@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import pageStyle from "./audience.module.css";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import axios from "axios";
 import { IoTime } from "react-icons/io5";
 import { FaLocationDot } from "react-icons/fa6";
@@ -11,7 +11,7 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 function AllEvent() {
   const navigateTO = useNavigate();
-  const { userID } = useSelector((state) => state.EventManagement);
+//   const { userID } = useSelector((state) => state.EventManagement);
   const [allEvents, setAllEvents] = useState({
     upcomingEvents: [],
     pastEvents: [],
