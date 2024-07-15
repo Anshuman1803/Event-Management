@@ -5,11 +5,13 @@ import PageLoader from "../pageLoader/PageLoader";
 import axios from "axios";
 import { IoTime } from "react-icons/io5";
 import { FaLocationDot } from "react-icons/fa6";
-import { LiaRupeeSignSolid } from "react-icons/lia";
+import { AiFillDollarCircle } from "react-icons/ai";
+import EventRegistration from "../EventRegistration/EventRegistration"
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 function EventDetails() {
   const [Loading, setLoading] = useState(false);
   const [data, setEventData] = useState({});
+  const [ToggleRegistration, setToggleRegistration] = useState(true)
   const { type, id } = useParams();
 
 const handleBackbuttonClick = (e)=>{
@@ -18,6 +20,7 @@ const handleBackbuttonClick = (e)=>{
 }
 const handleRegisterButtonClick  = (e)=>{
     e.preventDefault();
+    setToggleRegistration(true)
 }
 
   useEffect(() => {
@@ -69,8 +72,8 @@ const handleRegisterButtonClick  = (e)=>{
             </p>
 
             <p className={pageStyle.__EventpriceTagBox}>
+              <AiFillDollarCircle className={pageStyle.__priceTagICON} />
               {data?.ticketPrice}
-              <LiaRupeeSignSolid className={pageStyle.__priceTagICON} />
             </p>
 
             <p className={pageStyle.__EventTicketCount}>
@@ -93,6 +96,10 @@ const handleRegisterButtonClick  = (e)=>{
          </div>
         </>
       )}
+
+      {
+        ToggleRegistration && <EventRegistration CbCancle={setToggleRegistration}/>
+      }
     </section>
   );
 }

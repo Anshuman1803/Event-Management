@@ -4,14 +4,14 @@ import pageStyle from "./audience.module.css";
 import axios from "axios";
 import { IoTime } from "react-icons/io5";
 import { FaLocationDot } from "react-icons/fa6";
-import { LiaRupeeSignSolid } from "react-icons/lia";
+import { AiFillDollarCircle } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import PageLoader from "../../../components/pageLoader/PageLoader";
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 function AllEvent() {
   const navigateTO = useNavigate();
-//   const { userID } = useSelector((state) => state.EventManagement);
+  //   const { userID } = useSelector((state) => state.EventManagement);
   const [allEvents, setAllEvents] = useState({
     upcomingEvents: [],
     pastEvents: [],
@@ -21,6 +21,7 @@ function AllEvent() {
   const handleCardClick = (type, eventID) => {
     navigateTO(`/events/${type}/${eventID}`);
   };
+
   useEffect(() => {
     setLoading(true);
     axios
@@ -58,7 +59,11 @@ function AllEvent() {
               <>
                 {allEvents?.upcomingEvents.map((events) => {
                   return (
-                    <article onClick={()=>handleCardClick("UpcomingEvent",events._id)} key={events._id} className={pageStyle.__audience_EventCards}>
+                    <article
+                      onClick={() => handleCardClick("UpcomingEvent", events._id)}
+                      key={events._id}
+                      className={pageStyle.__audience_EventCards}
+                    >
                       {events?.isPrivate && <span className={pageStyle.privateTag}>Private</span>}
                       <h2 className={pageStyle.title}>{events?.title}</h2>
                       <p className={pageStyle.date}>
@@ -71,8 +76,8 @@ function AllEvent() {
                       <p className={pageStyle.description}>{events?.description.substring(0, 50)}...</p>
                       <div className={pageStyle.footer}>
                         <span className={pageStyle.price}>
+                          <AiFillDollarCircle className={pageStyle.statsICON} />
                           {events?.ticketPrice}
-                          <LiaRupeeSignSolid className={pageStyle.statsICON} />
                         </span>
                         <span className={pageStyle.availability}>
                           {events?.ticketQuantity > 0 ? `${events?.ticketQuantity} tickets left` : "Sold Out"}
@@ -102,7 +107,11 @@ function AllEvent() {
                 <>
                   {allEvents?.pastEvents.map((events) => {
                     return (
-                      <article onClick={()=>handleCardClick("PastEvent",events._id)} key={events._id} className={pageStyle.__audience_EventCards}>
+                      <article
+                        onClick={() => handleCardClick("PastEvent", events._id)}
+                        key={events._id}
+                        className={pageStyle.__audience_EventCards}
+                      >
                         {events?.isPrivate && <span className={pageStyle.privateTag}>Private</span>}
                         <h2 className={pageStyle.title}>{events?.title}</h2>
                         <p className={pageStyle.date}>
@@ -115,8 +124,8 @@ function AllEvent() {
                         <p className={pageStyle.description}>{events?.description.substring(0, 50)}...</p>
                         <div className={pageStyle.footer}>
                           <span className={pageStyle.price}>
+                            <AiFillDollarCircle className={pageStyle.statsICON} />
                             {events?.ticketPrice}
-                            <LiaRupeeSignSolid className={pageStyle.statsICON} />
                           </span>
                           <span className={pageStyle.availability}>
                             {events?.ticketQuantity > 0 ? `${events?.ticketQuantity} tickets left` : "Sold Out"}

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { AiFillDollarCircle } from "react-icons/ai";
 import styles from "./page.module.css";
 
-const EventRegistration = () => {
+const EventRegistration = ({CbCancle}) => {
   const [quantity, setQuantity] = useState(1);
   const [totalPrice, setTotalPrice] = useState(0);
 
@@ -47,13 +48,22 @@ const EventRegistration = () => {
             required
           />
         </div>
-        <div className={styles.formGroup}>
-          <span>Total Price</span>
-          <p className={styles.totalPrice}>{totalPrice.toFixed(2)}</p>
+        <div className={styles.__eventTicketPriceBox}>
+          <span>Ticket Price</span>
+          <p className={styles.price}><AiFillDollarCircle/>{ticketPrice.toFixed(2)} per ticket</p>
         </div>
-        <button type="submit" className={styles.submitBtn}>
-          Register
-        </button>
+        <div className={styles.__eventTicketPriceBox}>
+          <span>Total Price</span>
+          <p className={styles.totalPrice}> <AiFillDollarCircle/>{totalPrice.toFixed(2)}</p>
+        </div>
+        <div className={styles.buttonContainer} >
+          <button type="button" className={styles.backBtn} onClick={()=>CbCancle(false)}>
+            Cancle
+          </button>
+          <button type="submit" className={styles.submitBtn}>
+            Register
+          </button>
+        </div>
       </form>
     </div>
   );

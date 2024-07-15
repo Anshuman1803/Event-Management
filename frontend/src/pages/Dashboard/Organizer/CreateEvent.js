@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import axios from 'axios';
 import toast from "react-hot-toast"
 import ButtonLoader from "../../../components/buttonLoader/ButtonLoader"
+import { AiFillDollarCircle } from "react-icons/ai";
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const CreateEvent = () => {
   const { userID } = useSelector((state) => state.EventManagement);
@@ -136,7 +137,7 @@ const clearAllFields = ()=>{
         </div>
 
         <div className={styles.fieldGroup}>
-          <label htmlFor="ticketPrice" className={styles.label}>Ticket Price</label>
+          <label htmlFor="ticketPrice" className={styles.label}>Ticket Price <span className={styles.__priceInfoMsg}>( In dollar <AiFillDollarCircle/> )</span></label>
           <input
             required
             type="number"
