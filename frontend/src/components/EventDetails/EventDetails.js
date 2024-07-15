@@ -11,7 +11,7 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 function EventDetails() {
   const [Loading, setLoading] = useState(false);
   const [data, setEventData] = useState({});
-  const [ToggleRegistration, setToggleRegistration] = useState(true)
+  const [ToggleRegistration, setToggleRegistration] = useState(false)
   const { type, id } = useParams();
 
 const handleBackbuttonClick = (e)=>{
