@@ -182,4 +182,16 @@
         padding: 1em;
     }
 
+    .__buttoncontainer {
+        flex-direction: column-reverse;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .__RegistrationCLosed,
+    .__EventRegisterButton,
+    .__BackButton {
+        width: 90%;
+    }
 }
