@@ -90,6 +90,7 @@ const calculateStats = async (request, response) => {
     }
 };
 
+// ! get the all event data related to the particular organizer
 const getAllEvents = async (request, response) => {
     try {
         const { organizer } = request.params;
@@ -146,6 +147,7 @@ const getAllEvents = async (request, response) => {
     }
 };
 
+// ! show the individual events data
 const getEventdata = async (request, response) => {
     try {
         const { eventID } = request.params;
@@ -203,11 +205,85 @@ const getEventdata = async (request, response) => {
     }
 };
 
+//! Get all the events for audience
+const getEvents = async (request, response) => {
+    try {
+        const currentDate = new Date();
+        const upcomingEvents = [];
+        const pastEvents = [];
+
+        const allData = await eventCollection.aggregate([
+            {
+                $match: {},
+            },
+            {
+                $lookup: {
+                    from: "users",
+                    localField: "organizer",
+                    foreignField: "_id",
+                    as: "organizer",
+                },
+            },
+            {
+                $unwind: "$organizer",
+            },
+            {
+                $project: {
+                    _id: 1,
+                    title: 1,
+                    description: 1,
+                    date: 1,
+                    time: 1,
+                    location: 1,
+                    ticketPrice: 1,
+                    ticketQuantity: 1,
+                    isPrivate: 1,
+                    createdAt: 1,
+                    "organizer._id": 1,
+                    "organizer.fullName": 1,
+                    "organizer.profile": 1,
+                },
+            },
+        ]);
+
+        allData.forEach((event) => {
+            const eventDate = new Date(event.date);
+            if (eventDate > currentDate) {
+                upcomingEvents.push(event);
+            } else {
+                pastEvents.push(event);
+            }
+        })
+
+        if (allData.length > 0) {
+            return response.status(200).json({
+                success: true,
+                upcomingEvents: upcomingEvents,
+                pastEvents: pastEvents,
+            })
+
+        } else {
+            return response.status(404).json({
+                success: false,
+                resMsg: "No events found",
+                upcomingEvents: upcomingEvents,
+                pastEvents: pastEvents,
+            })
+        }
+    } catch (error) {
+        return response.status(500).json({
+            success: false,
+            resMsg: "Server failed to load! Try again.",
+            error: error.message
+        })
+    }
+}
 
 
 module.exports = {
     createNewEvent,
     calculateStats,
     getAllEvents,
-    getEventdata
+    getEventdata,
+    getEvents,
 };

@@ -10,7 +10,6 @@
   box-sizing: border-box;
   font-family: "Barlow", sans-serif;
   user-select: none;
-  scrollbar-width: none;
 }
 body{
   background-color: var(--mainBG);

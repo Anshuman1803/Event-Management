@@ -1,0 +1,164 @@
+.__audienceAllEventsContainer {
+    position: relative;
+    width: 100%;
+    min-height: calc(100dvh - 90px);
+}
+
+.__eventTypeTITLE {
+    width: 100%;
+    padding: 0.8em;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 35px;
+    background: linear-gradient(to top, #1e3c72 0%, #1e3c72 1%, #2a5298 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+.__audienceEventcard_Box {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(325px, 325px));
+    align-items: center;
+    justify-content: center;
+    column-gap: 20px;
+    padding: 1em;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.459);
+}
+
+.__audience_EventCards {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.__audience_EventCards:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.title {
+    color: var(--primaryColor);
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    width: 100%;
+    padding: 0em 10px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.date {
+    margin-top: 2.5em;
+}
+
+.date,
+.location {
+    color: var(--secondaryColor);
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+    align-items: center;
+    width: 100%;
+    padding: 0em 20px;
+}
+
+.description {
+    color: var(--secondaryColor);
+    margin-bottom: 15px;
+    font-size: 0.9em;
+    margin: 20px auto;
+    width: 100%;
+    padding: 0em 20px;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0em 20px;
+}
+
+.price {
+    font-weight: bold;
+    color: var(--primaryColor);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-weight: 800;
+}
+
+.statsICON {
+    font-size: 18px;
+    color: var(--primaryColor);
+}
+
+.availability {
+    font-size: 0.9em;
+    font-weight: 500;
+    color: var(--secondaryColor);
+}
+
+.privateTag {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: var(--primaryColor);
+    color: white;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.8em;
+}
+
+
+.__EventCards__userINFO {
+    margin-top: 20px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-top: 1px solid rgba(128, 128, 128, 0.427);
+    width: 100%;
+    padding: 1em 10px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 15px;
+}
+
+.__userInitials {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-weight: 600;
+    font-size: 20px;
+    background-color: #284ebe1f;
+    text-transform: uppercase;
+
+}
+
+.__userINFO_fullName {
+    font-weight: 500;
+    font-size: 18px;
+    color: grey;
+
+}
+
+
+
+@media screen and (max-width: 370px) {
+    .__audienceEventcard_Box {
+        display: grid;
+        grid-template-columns: repeat(1, 100%);
+        align-items: center;
+        justify-content: center;
+        column-gap: 20px;
+        padding: 1em;
+    }
+}
