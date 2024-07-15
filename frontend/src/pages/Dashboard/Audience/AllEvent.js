@@ -18,8 +18,8 @@ function AllEvent() {
   });
   const [Loading, setLoading] = useState(false);
 
-  const handleCardClick = (eventID) => {
-    navigateTO(`/event/${eventID}`);
+  const handleCardClick = (type, eventID) => {
+    navigateTO(`/events/${type}/${eventID}`);
   };
   useEffect(() => {
     setLoading(true);
@@ -50,7 +50,7 @@ function AllEvent() {
         <PageLoader />
       ) : (
         <>
-          <h1 className={pageStyle.__eventTypeTITLE}>Up Comming Events</h1>
+          <h1 className={pageStyle.__eventTypeTITLE}>UpComing Events</h1>
           <div className={pageStyle.__audienceEventcard_Box}>
             {allEvents?.upcomingEvents.length === 0 ? (
               <p> No UpComming Events </p>
@@ -58,7 +58,7 @@ function AllEvent() {
               <>
                 {allEvents?.upcomingEvents.map((events) => {
                   return (
-                    <article onClick={()=>handleCardClick(events._id)} key={events._id} className={pageStyle.__audience_EventCards}>
+                    <article onClick={()=>handleCardClick("UpcomingEvent",events._id)} key={events._id} className={pageStyle.__audience_EventCards}>
                       {events?.isPrivate && <span className={pageStyle.privateTag}>Private</span>}
                       <h2 className={pageStyle.title}>{events?.title}</h2>
                       <p className={pageStyle.date}>
@@ -102,7 +102,7 @@ function AllEvent() {
                 <>
                   {allEvents?.pastEvents.map((events) => {
                     return (
-                      <article onClick={()=>handleCardClick(events._id)} key={events._id} className={pageStyle.__audience_EventCards}>
+                      <article onClick={()=>handleCardClick("PastEvent",events._id)} key={events._id} className={pageStyle.__audience_EventCards}>
                         {events?.isPrivate && <span className={pageStyle.privateTag}>Private</span>}
                         <h2 className={pageStyle.title}>{events?.title}</h2>
                         <p className={pageStyle.date}>
