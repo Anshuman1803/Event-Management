@@ -1,6 +1,6 @@
 .formContainer {
     width: 100%;
-    min-height: calc(100dvh - 90px);
+    min-height: 100dvh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -96,13 +96,17 @@
 
 .submitButton {
     width: 100%;
-    padding: 0.75rem;
+    padding: 1em;
     background-color: var(--primaryColor);
     color: white;
     border: none;
     border-radius: 4px;
     font-size: 1rem;
+    height: 45px;
     transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .submitButton:hover {

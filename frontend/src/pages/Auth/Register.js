@@ -3,10 +3,12 @@ import styles from './auth.module.css';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios'
 import toast from 'react-hot-toast';
+import ButtonLoader from '../../components/buttonLoader/ButtonLoader';
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const Register = () => {
-  const navigateTO= useNavigate()
+  const navigateTO = useNavigate()
   const [showPassword, setShowPassword] = useState(false);
+  const [Loading, setLoading] = useState(false);
   const [userDetails, setUserDetails] = useState({
     email: "",
     fullName: "",
@@ -27,8 +29,10 @@ const Register = () => {
   // ! Register logic
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post(`${BACKEND_URL}auth/user/register`,userDetails).then((response)=>{
-      if(response.data.success){
+    setLoading(true)
+    axios.post(`${BACKEND_URL}auth/user/register`, userDetails).then((response) => {
+      if (response.data.success) {
+        setLoading(false)
         toast.success(response.data.resMsg);
         navigateTO("/user/login")
         setUserDetails({
@@ -37,10 +41,12 @@ const Register = () => {
           password: "",
           role: "audience",
         });
-      }else{
+      } else {
+        setLoading(false)
         toast.error(response.data.resMsg);
       }
-    }).catch((error)=>{
+    }).catch((error) => {
+      setLoading(false)
       if (error.response) {
         if (error.response.status === 409) {
           toast(error.response.data.resMsg, {
@@ -143,7 +149,11 @@ const Register = () => {
             </button>
           </div>
         </div>
-        <button type="submit" className={`${styles.submitButton}`}>Register</button>
+        <button type="submit" className={`${styles.submitButton}`}>
+          {
+            Loading ? <ButtonLoader /> : "Register"
+          }
+        </button>
         <div className={styles.registerLink}>
           <p>Already have an account?  <Link to="/user/login">Login here</Link></p>
         </div>

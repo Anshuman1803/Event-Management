@@ -5,8 +5,10 @@ import axios from 'axios'
 import toast from 'react-hot-toast';
 import { useDispatch } from 'react-redux'
 import { updateUserData } from '../../redux/ReduxSlice';
+import ButtonLoader from '../../components/buttonLoader/ButtonLoader';
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const Login = () => {
+    const [Loading, setLoading] = useState(false);
   const dispatchTo = useDispatch();
   const navigateTO= useNavigate()
   const [showPassword, setShowPassword] = useState(false);
@@ -28,8 +30,10 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true)
     axios.post(`${BACKEND_URL}auth/user/login`, userDetails).then((response) => {
       if (response.data.success) {
+        setLoading(false);
         toast.success(response.data.resMsg);
         dispatchTo(updateUserData({
           profile: response.data.UserDetails.profile,
@@ -45,9 +49,11 @@ const Login = () => {
           role: "audience",
         });
       } else {
+        setLoading(false);
         toast.error(response.data.resMsg);
       }
     }).catch((error) => {
+      setLoading(false);
       if (error.response) {
         if (error.response.status === 409) {
           toast(error.response.data.resMsg, {
@@ -135,7 +141,11 @@ const Login = () => {
           </div>
         </div>
 
-        <button type="submit" className={styles.submitButton}>Login</button>
+        <button type="submit" className={styles.submitButton}>
+          {
+            Loading ? <ButtonLoader/> : "Login"
+          }
+          </button>
         <div className={styles.registerLink}>
           <p>New user? <Link to="/user/register">Register here</Link></p>
         </div>

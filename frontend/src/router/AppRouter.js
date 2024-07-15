@@ -20,7 +20,13 @@ function AppRouter() {
     return (
         <>
             {
-                role === "organizer" ? <Organizer /> : <Audience />
+                (role !== "organizer" && role !== "audience") && <AuthRoute />
+            }
+            {
+                role === "organizer" && <Organizer />
+            }
+            {
+                role === "audience" && <Audience />
             }
         </>
 
@@ -39,7 +45,7 @@ function Organizer() {
                 <Route path='/all-events' element={<Suspense fallback={<div>Loading...</div>}> <AllEvent /> </Suspense>} />
 
                 <Route path='/setting' element={<Suspense fallback={<div>Loading...</div>}> <Setting /> </Suspense>} />
-                
+
                 {/* <Route path='/event/:id' element={<Suspense fallback={<div>Loading...</div>}> <EventDetails /> </Suspense>} /> */}
 
                 <Route path='/*' index={1} element={<Suspense fallback={<div>Loading...</div>}> <Profile /> </Suspense>} />
@@ -54,18 +60,26 @@ function Audience() {
     const { isActive } = useSelector((state) => state.EventManagement);
     return (
         <Routes>
-            <Route path='/' element={ <Suspense fallback={<div>Loading...</div>}> <Home /> </Suspense>} />
+            <Route path='/' element={<Suspense fallback={<div>Loading...</div>}> <Home /> </Suspense>} />
 
-            <Route path='/events' element={ <Suspense fallback={<div>Loading...</div>}> <Events /> </Suspense>} />
+            <Route path='/events' element={<Suspense fallback={<div>Loading...</div>}> <Events /> </Suspense>} />
 
             {
                 !isActive && <>
-                    <Route path='/user/login' element={ <Suspense fallback={<div>Loading...</div>}> <Login /> </Suspense>} />
-                    <Route path='/user/register' element={ <Suspense fallback={<div>Loading...</div>}> <Register /> </Suspense>} />
+                    <Route path='/user/login' element={<Suspense fallback={<div>Loading...</div>}> <Login /> </Suspense>} />
+                    <Route path='/user/register' element={<Suspense fallback={<div>Loading...</div>}> <Register /> </Suspense>} />
                 </>
-            }   
-            <Route path='/*' element={ <Suspense fallback={<div>Loading...</div>}> <Home /> </Suspense>} />
-        
+            }
+            <Route path='/*' element={<Suspense fallback={<div>Loading...</div>}> <Home /> </Suspense>} />
+
         </Routes>
     )
+}
+
+function AuthRoute() {
+    return <Routes>
+        <Route path='/user/login' element={<Suspense fallback={<div>Loading...</div>}> <Login /> </Suspense>} />
+        <Route path='/user/register' element={<Suspense fallback={<div>Loading...</div>}> <Register /> </Suspense>} />
+        <Route path='/' element={<Suspense fallback={<div>Loading...</div>}> <Login /> </Suspense>} />
+    </Routes>
 }

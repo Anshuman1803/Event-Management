@@ -12,7 +12,7 @@ function App() {
         reverseOrder={false}
       />
       {
-        role !== "organizer" && <Header />
+        (role !== "organizer" && role === "audience") && <Header />
       }
       <AppRouter />
     </>
