@@ -46,10 +46,10 @@ const EventRegistration = ({ CbCancle, ticketPrice, eventID }) => {
           if (response.data.success) {
             setLoading(false);
             toast.success(response.data.resMsg);
-            clearFields();
+            CbCancle(false);
           } else {
             toast.error(response.data.resMsg);
-            clearFields();
+            CbCancle(false);
             setLoading(false);
           }
         })

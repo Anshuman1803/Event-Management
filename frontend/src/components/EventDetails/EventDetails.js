@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import pageStyle from "./eventdetails.module.css";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import PageLoader from "../pageLoader/PageLoader";
 import axios from "axios";
 import { IoTime } from "react-icons/io5";
@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 function EventDetails() {
   const { userID } = useSelector((state) => state.EventManagement);
+  const navigateTO = useNavigate()
   const [Loading, setLoading] = useState(false);
   const [data, setEventData] = useState({});
   const [ToggleRegistration, setToggleRegistration] = useState(false)
@@ -18,7 +19,7 @@ function EventDetails() {
 
 const handleBackbuttonClick = (e)=>{
     e.preventDefault();
-    window.history.back();
+    navigateTO("/")
 }
 const handleRegisterButtonClick  = (e)=>{
     e.preventDefault();
@@ -26,20 +27,23 @@ const handleRegisterButtonClick  = (e)=>{
 }
 
   useEffect(() => {
-    setLoading(true);
-    axios
-      .get(`${BACKEND_URL}events/get-event/${id}`)
-      .then((response) => {
-        setLoading(false);
-        if (response.data.success) {
-          setEventData(response.data.eventData);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-        setLoading(false);
-      });
-  }, [id]);
+    if(!ToggleRegistration){
+      setLoading(true);
+      axios
+        .get(`${BACKEND_URL}events/get-event/${id}`)
+        .then((response) => {
+          setLoading(false);
+          if (response.data.success) {
+            setEventData(response.data.eventData);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          setLoading(false);
+        });
+    }
+   
+  }, [id,ToggleRegistration]);
 
   return (
     <section className={pageStyle.__DetailsPageContainer}>
