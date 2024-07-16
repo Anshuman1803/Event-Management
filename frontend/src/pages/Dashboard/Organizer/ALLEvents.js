@@ -14,8 +14,8 @@ function ALLEvents() {
   const [allEvents, setAllEvents] = useState([]);
   const [Loading, setLoading] = useState(false);
 
-  const handleCardClick = (eventID) => {
-    navigateTO(`/event/${eventID}`);
+  const handleCardClick = (type, eventID) => {
+    navigateTO(`/event/${type}/${eventID}`);
   };
 
   useEffect(() => {
@@ -45,16 +45,16 @@ function ALLEvents() {
         <>
           {allEvents?.map((events, index) => {
             return (
-              <article className={styles.__eventsCard} key={events?._id} onClick={() => handleCardClick(events._id)}>
-                <h2 className={styles.title}>{events?.title}</h2>
+              <article className={styles.__eventsCard} key={events?._id} onClick={() => handleCardClick(userID,events._id)}>
+                <h2 className={styles.title}>{events?.title.slice(0, 30)}...</h2>
                 <p className={styles.date}>
                   <IoTime className={styles.statsICON} />
                   {new Date(events?.date).toLocaleDateString()} at {events?.time}
                 </p>
                 <p className={styles.location}>
-                  <FaLocationDot className={styles.statsICON} /> {events?.location}
+                  <FaLocationDot className={styles.statsICON} /> {events?.location.slice(0, 30)}
                 </p>
-                <p className={styles.description}>{events?.description.substring(0, 50)}...</p>
+                <p className={styles.description}>{events?.description.substring(0, 30)}...</p>
                 <div className={styles.footer}>
                   <span className={styles.price}>
                     <AiFillDollarCircle className={styles.statsICON} />

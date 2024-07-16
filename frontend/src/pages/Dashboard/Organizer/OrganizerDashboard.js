@@ -37,7 +37,7 @@ function OrganizerDashboard() {
 
                     <NavLink  title='Profile' to={"/profile"} className={({ isActive }) => (isActive ? `${pageStyle.__navItems} ${pageStyle.active}` : `${pageStyle.__navItems}`)}>
                         <FaUser className={`${pageStyle.__navItemsICON}`} />
-                        <span className={`${pageStyle.__navItemsText}`}>Profile</span>
+                        <span className={`${pageStyle.__navItemsText}`}>Stats</span>
                     </NavLink>
 
                     <NavLink title='Create Events'  to={"/create-events"} className={({ isActive }) => (isActive ? `${pageStyle.__navItems} ${pageStyle.active}` : `${pageStyle.__navItems}`)}>
@@ -47,7 +47,7 @@ function OrganizerDashboard() {
 
                     <NavLink  title='All Events' to={"/all-events"} className={({ isActive }) => (isActive ? `${pageStyle.__navItems} ${pageStyle.active}` : `${pageStyle.__navItems}`)}>
                         <MdOutlineEventAvailable className={`${pageStyle.__navItemsICON}`} />
-                        <span className={`${pageStyle.__navItemsText}`}>All Events</span>
+                        <span className={`${pageStyle.__navItemsText}`}>Events</span>
                     </NavLink>
 
 

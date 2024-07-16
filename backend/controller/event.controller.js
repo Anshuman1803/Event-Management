@@ -316,7 +316,7 @@ const getEvents = async (request, response) => {
         resMsg: "No events found",
         upcomingEvents: upcomingEvents,
         pastEvents: pastEvents,
-      });
+       });
     }
   } catch (error) {
     return response.status(500).json({

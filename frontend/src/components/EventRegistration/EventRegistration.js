@@ -13,6 +13,12 @@ const EventRegistration = ({ CbCancle, ticketPrice, eventID }) => {
   const [phone, setPhone] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const clearFields = () => {
+    setQuantity(1);
+    setTotalPrice(0);
+    setPhone("");
+  };
+
   useEffect(() => {
     if (!isNaN(quantity)) {
       setTotalPrice(quantity * ticketPrice);
@@ -40,12 +46,15 @@ const EventRegistration = ({ CbCancle, ticketPrice, eventID }) => {
           if (response.data.success) {
             setLoading(false);
             toast.success(response.data.resMsg);
+            clearFields();
           } else {
             toast.error(response.data.resMsg);
+            clearFields();
             setLoading(false);
           }
         })
         .catch((error) => {
+          clearFields();
           setLoading(false);
           console.log(error);
         });

@@ -14,8 +14,12 @@
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
+    border-top: 1px solid rgba(128, 128, 128, 0.459);
+
 }
-.__audienceEventcard_Box, .__audienceEventcard_secondaryBOX {
+
+.__audienceEventcard_Box,
+.__audienceEventcard_secondaryBOX {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(345px, 345px));
     align-items: center;
@@ -23,9 +27,8 @@
     column-gap: 20px;
     padding: 1em 1.5em;
 }
-.__audienceEventcard_secondaryBOX{
-        border-bottom: 1px solid rgba(128, 128, 128, 0.459);
-}
+
+
 .__audience_EventCards {
     width: 100%;
     border-radius: 8px;
@@ -149,24 +152,30 @@
     font-weight: 500;
     font-size: 18px;
     color: grey;
-
+}
+.__eventCreatedAt{
+    font-size: 14px;
+    font-weight: 700;
 }
 
 
 @media screen and (max-width: 900px) {
+
     .__audienceEventcard_Box,
-    .__audienceEventcard_secondaryBOX{
+    .__audienceEventcard_secondaryBOX {
         justify-content: center;
     }
 }
 
 @media screen and (max-width: 370px) {
-    .__eventTypeTITLE{
+    .__eventTypeTITLE {
         font-size: 28px;
         text-align: center;
         border-bottom: 1px solid rgba(128, 128, 128, 0.459);
     }
-    .__audienceEventcard_Box {
+
+    .__audienceEventcard_Box,
+    .__audienceEventcard_secondaryBOX {
         display: grid;
         grid-template-columns: repeat(1, 100%);
         align-items: center;
@@ -175,4 +184,3 @@
         padding: 1em;
     }
 }
-

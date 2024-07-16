@@ -60,7 +60,7 @@
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    min-width: 500px;
+    min-width: 400px;
     position: relative;
 }
 
