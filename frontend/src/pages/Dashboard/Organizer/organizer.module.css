@@ -269,10 +269,10 @@
 .__allEventsContainer {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(375px, 375px));
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     gap: 20px;
-    padding: 1em 0.6em;
+    padding: 2em;
 }
 
 .__eventsCard {
@@ -383,6 +383,9 @@
 
     .__navItemsICON {
         font-size: 26px;
+    }
+    .__allEventsContainer{
+        justify-content: center;
     }
 
 }

@@ -15,16 +15,17 @@
     -webkit-background-clip: text;
     color: transparent;
 }
-.__audienceEventcard_Box {
+.__audienceEventcard_Box, .__audienceEventcard_secondaryBOX {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(345px, 345px));
     align-items: center;
-    justify-content: center;
+    justify-content: start;
     column-gap: 20px;
-    padding: 1em;
-    border-bottom: 1px solid rgba(128, 128, 128, 0.459);
+    padding: 1em 1.5em;
 }
-
+.__audienceEventcard_secondaryBOX{
+        border-bottom: 1px solid rgba(128, 128, 128, 0.459);
+}
 .__audience_EventCards {
     width: 100%;
     border-radius: 8px;
@@ -152,8 +153,19 @@
 }
 
 
+@media screen and (max-width: 900px) {
+    .__audienceEventcard_Box,
+    .__audienceEventcard_secondaryBOX{
+        justify-content: center;
+    }
+}
 
 @media screen and (max-width: 370px) {
+    .__eventTypeTITLE{
+        font-size: 28px;
+        text-align: center;
+        border-bottom: 1px solid rgba(128, 128, 128, 0.459);
+    }
     .__audienceEventcard_Box {
         display: grid;
         grid-template-columns: repeat(1, 100%);
@@ -163,3 +175,4 @@
         padding: 1em;
     }
 }
+

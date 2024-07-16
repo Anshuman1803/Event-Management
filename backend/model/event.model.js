@@ -32,6 +32,11 @@ const EventSchema = new mongoose.Schema({
     required: true,
     min: 1
   },
+  soldTickets: {
+    type: Number,
+    required: true,
+    default : 0,
+  },
   isPrivate: {
     type: Boolean,
     default: false

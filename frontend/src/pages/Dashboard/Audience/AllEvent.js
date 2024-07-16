@@ -73,7 +73,7 @@ function AllEvent() {
                       <p className={pageStyle.location}>
                         <FaLocationDot className={pageStyle.statsICON} /> {events?.location.slice(0, 30)}...
                       </p>
-                      <p className={pageStyle.description}>{events?.description.substring(0,30)}...</p>
+                      <p className={pageStyle.description}>{events?.description.substring(0, 30)}...</p>
                       <div className={pageStyle.footer}>
                         <span className={pageStyle.price}>
                           <AiFillDollarCircle className={pageStyle.statsICON} />
@@ -98,54 +98,56 @@ function AllEvent() {
             )}
           </div>
 
-          <>
-            <h1 className={pageStyle.__eventTypeTITLE}>Past Events</h1>
-            <div className={pageStyle.__audienceEventcard_Box}>
-              {allEvents?.pastEvents.length === 0 ? (
-                <p> No past Events </p>
-              ) : (
-                <>
-                  {allEvents?.pastEvents.map((events) => {
-                    return (
-                      <article
-                        onClick={() => handleCardClick("PastEvent", events._id)}
-                        key={events._id}
-                        className={pageStyle.__audience_EventCards}
-                      >
-                        {events?.isPrivate && <span className={pageStyle.privateTag}>Private</span>}
-                        <h2 className={pageStyle.title}>{events?.title}</h2>
-                        <p className={pageStyle.date}>
-                          <IoTime className={pageStyle.statsICON} />
-                          {new Date(events?.date).toLocaleDateString()} at {events?.time}
-                        </p>
-                        <p className={pageStyle.location}>
-                          <FaLocationDot className={pageStyle.statsICON} /> {events?.location?.slice(0, 10)}..
-                        </p>
-                        <p className={pageStyle.description}>{events?.description.substring(0, 50)}...</p>
-                        <div className={pageStyle.footer}>
-                          <span className={pageStyle.price}>
-                            <AiFillDollarCircle className={pageStyle.statsICON} />
-                            {events?.ticketPrice}
-                          </span>
-                          <span className={pageStyle.availability}>
-                            {events?.ticketQuantity > 0 ? `${events?.ticketQuantity} tickets left` : "Sold Out"}
-                          </span>
-                        </div>
-                        <div className={pageStyle.__EventCards__userINFO}>
-                          {events?.organizer.profile ? (
-                            <></>
-                          ) : (
-                            <span className={pageStyle.__userInitials}>{events?.organizer.fullName[0]}</span>
-                          )}
-                          <span className={pageStyle.__userINFO_fullName}>{events?.organizer.fullName}</span>
-                        </div>
-                      </article>
-                    );
-                  })}
-                </>
-              )}
-            </div>
-          </>
+          {allEvents?.pastEvents.length > 0 && (
+            <>
+              <h1 className={pageStyle.__eventTypeTITLE}>Past Events</h1>
+              <div className={pageStyle.__audienceEventcard_secondaryBOX}>
+                {allEvents?.pastEvents.length === 0 ? (
+                  <p> No past Events </p>
+                ) : (
+                  <>
+                    {allEvents?.pastEvents.map((events) => {
+                      return (
+                        <article
+                          onClick={() => handleCardClick("PastEvent", events._id)}
+                          key={events._id}
+                          className={pageStyle.__audience_EventCards}
+                        >
+                          {events?.isPrivate && <span className={pageStyle.privateTag}>Private</span>}
+                          <h2 className={pageStyle.title}>{events?.title}</h2>
+                          <p className={pageStyle.date}>
+                            <IoTime className={pageStyle.statsICON} />
+                            {new Date(events?.date).toLocaleDateString()} at {events?.time}
+                          </p>
+                          <p className={pageStyle.location}>
+                            <FaLocationDot className={pageStyle.statsICON} /> {events?.location?.slice(0, 10)}..
+                          </p>
+                          <p className={pageStyle.description}>{events?.description.substring(0, 50)}...</p>
+                          <div className={pageStyle.footer}>
+                            <span className={pageStyle.price}>
+                              <AiFillDollarCircle className={pageStyle.statsICON} />
+                              {events?.ticketPrice}
+                            </span>
+                            <span className={pageStyle.availability}>
+                              {events?.ticketQuantity > 0 ? `${events?.ticketQuantity} tickets left` : "Sold Out"}
+                            </span>
+                          </div>
+                          <div className={pageStyle.__EventCards__userINFO}>
+                            {events?.organizer.profile ? (
+                              <></>
+                            ) : (
+                              <span className={pageStyle.__userInitials}>{events?.organizer.fullName[0]}</span>
+                            )}
+                            <span className={pageStyle.__userINFO_fullName}>{events?.organizer.fullName}</span>
+                          </div>
+                        </article>
+                      );
+                    })}
+                  </>
+                )}
+              </div>
+            </>
+          )}
         </>
       )}
     </section>
