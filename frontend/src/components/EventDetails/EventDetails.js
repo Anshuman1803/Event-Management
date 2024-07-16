@@ -98,7 +98,7 @@ const handleRegisterButtonClick  = (e)=>{
       )}
 
       {
-        ToggleRegistration && <EventRegistration CbCancle={setToggleRegistration}/>
+        ToggleRegistration && <EventRegistration CbCancle={setToggleRegistration} ticketPrice={data?.ticketPrice} eventID={data?._id}/>
       }
     </section>
   );

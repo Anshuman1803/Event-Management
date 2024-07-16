@@ -71,9 +71,9 @@ function AllEvent() {
                         {new Date(events?.date).toLocaleDateString()} at {events?.time}
                       </p>
                       <p className={pageStyle.location}>
-                        <FaLocationDot className={pageStyle.statsICON} /> {events?.location}
+                        <FaLocationDot className={pageStyle.statsICON} /> {events?.location.slice(0, 30)}...
                       </p>
-                      <p className={pageStyle.description}>{events?.description.substring(0, 50)}...</p>
+                      <p className={pageStyle.description}>{events?.description.substring(0,30)}...</p>
                       <div className={pageStyle.footer}>
                         <span className={pageStyle.price}>
                           <AiFillDollarCircle className={pageStyle.statsICON} />
@@ -119,7 +119,7 @@ function AllEvent() {
                           {new Date(events?.date).toLocaleDateString()} at {events?.time}
                         </p>
                         <p className={pageStyle.location}>
-                          <FaLocationDot className={pageStyle.statsICON} /> {events?.location}
+                          <FaLocationDot className={pageStyle.statsICON} /> {events?.location?.slice(0, 10)}..
                         </p>
                         <p className={pageStyle.description}>{events?.description.substring(0, 50)}...</p>
                         <div className={pageStyle.footer}>
