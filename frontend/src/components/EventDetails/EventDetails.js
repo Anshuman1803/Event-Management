@@ -57,7 +57,7 @@ const handleRegisterButtonClick  = (e)=>{
               <span className={pageStyle.__userInitials}>{data?.organizer?.fullName[0]}</span>
             )}
             <span className={pageStyle.__EventOrganizer_Name}> {data?.organizer?.fullName}</span>
-            {!data?.isPrivate && <span className={pageStyle.__EventprivateTag}>Private</span>}
+            {data?.isPrivate && <span className={pageStyle.__EventprivateTag}>Private</span>}
           </p>
 
           <div className={pageStyle.__eventData_Container}>
