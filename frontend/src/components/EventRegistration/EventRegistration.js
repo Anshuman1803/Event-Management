@@ -92,16 +92,19 @@ const EventRegistration = ({ CbCancle, ticketPrice, eventID }) => {
         <div className={styles.__eventTicketPriceBox}>
           <span>Total Price</span>
           <p className={styles.totalPrice}>
-            {" "}
             <AiFillDollarCircle />
             {totalPrice.toFixed(2)}
           </p>
         </div>
         <div className={styles.buttonContainer}>
-          <button type="button" className={styles.backBtn} onClick={() => CbCancle(false)}>
+          <button
+            type="button"
+            className={`${styles.backBtn} ${loading && "Unactive"}`}
+            onClick={() => CbCancle(false)}
+          >
             Cancle
           </button>
-          <button type="submit" className={styles.submitBtn}>
+          <button type="submit" className={`${styles.submitBtn} ${loading && "Unactive"}`}>
             {loading ? <ButtonLoader /> : "Register"}
           </button>
         </div>

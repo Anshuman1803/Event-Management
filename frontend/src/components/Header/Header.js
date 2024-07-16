@@ -12,15 +12,10 @@ export function Header() {
   const dispatchTO = useDispatch();
   const navigateTO = useNavigate();
 
-  const handleProfileClick = (e) => {
-    const ActiveUserPOPUP = document.querySelector(`.${headerStyle.__activeUser_POPUP}`);
-    ActiveUserPOPUP.classList.toggle(`${headerStyle.__UnactivePOPUP}`)
-  }
 
   const handleLogOutClick = (e) => {
     dispatchTO(UserLoggedOut());
     navigateTO('/user/login');
-    handleProfileClick();
   }
   return (
     <header className={`${headerStyle.__appHeader}`}>

@@ -141,12 +141,12 @@ const Login = () => {
           </div>
         </div>
 
-        <button type="submit" className={styles.submitButton}>
+        <button type="submit" className={`${styles.submitButton} ${Loading && "Unactive"}`}>
           {
             Loading ? <ButtonLoader/> : "Login"
           }
           </button>
-        <div className={styles.registerLink}>
+        <div className={`${styles.registerLink} ${Loading && "Unactive"}`}>
           <p>New user? <Link to="/user/register">Register here</Link></p>
         </div>
       </form>

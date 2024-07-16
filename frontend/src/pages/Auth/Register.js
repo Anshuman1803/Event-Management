@@ -149,12 +149,12 @@ const Register = () => {
             </button>
           </div>
         </div>
-        <button type="submit" className={`${styles.submitButton}`}>
+        <button type="submit" className={`${styles.submitButton} ${Loading && "Unactive"}`}>
           {
             Loading ? <ButtonLoader /> : "Register"
           }
         </button>
-        <div className={styles.registerLink}>
+        <div className={`${styles.registerLink} ${Loading && "Unactive"}`}>
           <p>Already have an account?  <Link to="/user/login">Login here</Link></p>
         </div>
       </form>

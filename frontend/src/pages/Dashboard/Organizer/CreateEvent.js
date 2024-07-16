@@ -182,7 +182,7 @@ const clearAllFields = ()=>{
           </label>
         </div>
 
-        <button type="submit" className={`${styles.submitButton}`}>
+        <button type="submit" className={`${styles.submitButton} ${loading && 'Unactive'}`}>
           {
             loading ? <ButtonLoader/> : "Create Event"
           }
