@@ -1,6 +1,5 @@
 const { eventCollection } = require("../model/event.model");
 const { eventRegistrationCollection } = require("../model/eventregistration.model");
-const { userCollection } = require("../model/user.model");
 const Mongoose = require("mongoose");
 
 // !create new events
@@ -28,8 +27,6 @@ const createNewEvent = async (request, response) => {
   }
 };
 
-// You'd update the user's document in userCollection to include the new event in their list of registered events.
-// You'd update the event's document in eventCollection to increment the "Tickets Sold" field.
 // ! Register the user for the events
 const eventRegistration = async (request, response) => {
   try {
@@ -45,8 +42,11 @@ const eventRegistration = async (request, response) => {
       PurchaseDate: Date.now(),
     });
     if (newRegistration) {
-      await eventCollection.updateOne({ _id: EventID }, { $inc: { soldTickets: QuantityofTickets } });
-      await userCollection.updateOne({ _id: UserID }, { $push: { registeredEvents: EventID } });
+
+      await eventCollection.updateOne({ _id: EventID }, {
+        $addToSet: { registeredUser: UserID },
+        $inc: { soldTickets: QuantityofTickets },
+      })
 
       response.status(201).json({
         success: true,
@@ -165,6 +165,7 @@ const getAllEvents = async (request, response) => {
           ticketQuantity: 1,
           isPrivate: 1,
           createdAt: 1,
+          soldTickets : 1,
           "organizer._id": 1,
           "organizer.fullName": 1,
           "organizer.profile": 1,
@@ -222,6 +223,8 @@ const getEventdata = async (request, response) => {
           ticketQuantity: 1,
           isPrivate: 1,
           createdAt: 1,
+          soldTickets : 1,
+          registeredUser : 1,
           "organizer._id": 1,
           "organizer.fullName": 1,
           "organizer.profile": 1,
@@ -283,6 +286,8 @@ const getEvents = async (request, response) => {
           ticketQuantity: 1,
           isPrivate: 1,
           createdAt: 1,
+          soldTickets : 1,
+          registeredUser : 1,
           "organizer._id": 1,
           "organizer.fullName": 1,
           "organizer.profile": 1,

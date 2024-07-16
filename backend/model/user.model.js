@@ -35,11 +35,6 @@ const UserSchema = mongoose.Schema({
         _id: { type: mongoose.Schema.Types.ObjectId, auto: false },
         ref: 'Event'
     }],
-    registeredEvents: [{
-        type: mongoose.Schema.Types.ObjectId,
-        _id: { type: mongoose.Schema.Types.ObjectId, auto: false },
-        ref: 'Event'
-    }],
     createdAt: {
         type: Date,
         default: Date.now

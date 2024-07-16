@@ -7,8 +7,10 @@ import { IoTime } from "react-icons/io5";
 import { FaLocationDot } from "react-icons/fa6";
 import { AiFillDollarCircle } from "react-icons/ai";
 import EventRegistration from "../EventRegistration/EventRegistration"
+import { useSelector } from "react-redux";
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 function EventDetails() {
+  const { userID } = useSelector((state) => state.EventManagement);
   const [Loading, setLoading] = useState(false);
   const [data, setEventData] = useState({});
   const [ToggleRegistration, setToggleRegistration] = useState(false)
@@ -77,7 +79,7 @@ const handleRegisterButtonClick  = (e)=>{
             </p>
 
             <p className={pageStyle.__EventTicketCount}>
-              {data?.ticketQuantity > 0 ? `${data?.ticketQuantity} tickets left` : "Sold Out"}
+            {data?.soldTickets <= data?.ticketQuantity ? `${data?.ticketQuantity - data?.soldTickets} tickets left` : "Sold Out"}
             </p>
           </div>
 
@@ -90,9 +92,12 @@ const handleRegisterButtonClick  = (e)=>{
          }
         
         {
-            type === "UpcomingEvent" &&  <button type="button" className={pageStyle.__EventRegisterButton} onClick={handleRegisterButtonClick}>Register Now</button>
+            (type === "UpcomingEvent" && !data?.registeredUser?.includes(userID)) &&  <button type="button" className={pageStyle.__EventRegisterButton} onClick={handleRegisterButtonClick}>Register Now</button>
         }
+        {
+            (data?.registeredUser?.includes(userID)) &&  <p className={pageStyle.__RegistrationCLosed}>Already Registered</p>
 
+        }
          </div>
         </>
       )}

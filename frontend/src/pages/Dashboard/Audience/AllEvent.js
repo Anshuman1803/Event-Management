@@ -45,6 +45,7 @@ function AllEvent() {
         console.log(error);
       });
   }, []);
+
   return (
     <section className={pageStyle.__audienceAllEventsContainer}>
       {Loading ? (
@@ -80,7 +81,7 @@ function AllEvent() {
                           {events?.ticketPrice}
                         </span>
                         <span className={pageStyle.availability}>
-                          {events?.ticketQuantity > 0 ? `${events?.ticketQuantity} tickets left` : "Sold Out"}
+                        {events?.soldTickets <= events?.ticketQuantity ? `${events?.ticketQuantity - events?.soldTickets} tickets left` : "Sold Out"}
                         </span>
                       </div>
                       <div className={pageStyle.__EventCards__userINFO}>
@@ -98,6 +99,7 @@ function AllEvent() {
             )}
           </div>
 
+          {/* past events map */}
           {allEvents?.pastEvents.length > 0 && (
             <>
               <h1 className={pageStyle.__eventTypeTITLE}>Past Events</h1>
