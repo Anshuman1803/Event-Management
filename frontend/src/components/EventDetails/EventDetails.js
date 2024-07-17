@@ -7,6 +7,7 @@ import { IoTime } from "react-icons/io5";
 import { FaLocationDot } from "react-icons/fa6";
 import { AiFillDollarCircle } from "react-icons/ai";
 import EventRegistration from "../EventRegistration/EventRegistration"
+import RegisteredUser from "../RegisteredUser/RegisteredUser";
 import { useSelector } from "react-redux";
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 function EventDetails() {
@@ -38,13 +39,11 @@ const handleRegisterButtonClick  = (e)=>{
           }
         })
         .catch((error) => {
-          console.log(error);
           setLoading(false);
         });
-    }
-   
-  }, [id,ToggleRegistration]);
-
+      }
+      
+    }, [id,ToggleRegistration]);
   return (
     <section className={pageStyle.__DetailsPageContainer}>
       {Loading ? (
@@ -88,6 +87,10 @@ const handleRegisterButtonClick  = (e)=>{
           </div>
 
           <hr/>
+
+          {
+            (type !== "PastEvent" && type !== "UpcomingEvent") && <RegisteredUser registrations={data?.registeredUser}/>
+          }
          <div className={pageStyle.__buttoncontainer}>
          <button type="button" className={pageStyle.__BackButton} onClick={handleBackbuttonClick}>Back</button>
          

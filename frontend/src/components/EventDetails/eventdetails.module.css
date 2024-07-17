@@ -109,6 +109,10 @@
     color: var(--primaryColor);
     font-size: 22px;
 }
+.__RegisteredUserListBox{
+    border: 2px solid red;
+    width: 100%;
+}
 
 .__buttoncontainer {
     display: flex;

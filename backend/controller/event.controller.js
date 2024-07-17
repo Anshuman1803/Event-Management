@@ -203,6 +203,41 @@ const getEventdata = async (request, response) => {
         $unwind: "$organizer",
       },
       {
+        $lookup :{
+          from: "eventregistrations",
+          localField: "_id",
+          foreignField: "EventID",
+          as: "registeredUser",
+          pipeline: [
+            {
+              $lookup: {
+                from: "users",
+                localField: "UserID",
+                foreignField: "_id",
+                as: "user",
+              },
+            },
+            {
+              $unwind : "$user"
+            },{
+              $replaceRoot: {
+                newRoot: {
+                  $mergeObjects: [
+                    {
+                      phone: "$phone",
+                      QuantityofTickets: "$QuantityofTickets",
+                      TotalPricePaid: "$TotalPricePaid",
+                      PurchaseDate: "$PurchaseDate",
+                    },
+                    "$user",
+                  ],
+                },
+              },
+            },
+          ],
+        }
+      },
+      {
         $project: {
           _id: 1,
           title: 1,
@@ -215,7 +250,12 @@ const getEventdata = async (request, response) => {
           isPrivate: 1,
           createdAt: 1,
           soldTickets: 1,
-          registeredUser: 1,
+          "registeredUser.phone": 1,
+          "registeredUser.QuantityofTickets": 1,
+          "registeredUser.TotalPricePaid": 1,
+          "registeredUser.PurchaseDate": 1,
+          "registeredUser.email": 1,
+          "registeredUser.fullName": 1,
           "organizer._id": 1,
           "organizer.fullName": 1,
           "organizer.profile": 1,
