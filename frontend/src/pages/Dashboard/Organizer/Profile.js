@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import pageStyle from "./organizer.module.css";
 import { MdEmojiEvents } from "react-icons/md";
-import { LiaRupeeSignSolid } from "react-icons/lia";
+import { FaDollarSign } from "react-icons/fa6";
+import { HiUserGroup } from "react-icons/hi";
 import { GiTicket } from "react-icons/gi";
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import PageLoader from '../../../components/pageLoader/PageLoader';
-// import toast from "react-hot-toast"
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 function Profile() {
   const { userID } = useSelector((state) => state.EventManagement);
@@ -17,12 +17,6 @@ function Profile() {
     axios.get(`${BACKEND_URL}events/calculate-user-stats/${userID}`).then((response) => {
       if (response.data.success) {
         setStatsData(response.data.statsData);
-//         totalEvents
-// totalUpcomingEvents
-// totalPastEvents
-// totalTicketSales
-// totalIncome
-// registeredUsers
         setLoading(false);
       } else {
         setStatsData(response.data.statsData);
@@ -40,38 +34,32 @@ function Profile() {
         Loading ? <PageLoader /> : <div className={`${pageStyle.__statsBox}`}>
 
           <div className={`${pageStyle.__StatsCard}`}>
-            <MdEmojiEvents className={`${pageStyle.__StatsCard_ICON}`} />
-            <h2 className={`${pageStyle.__StatsCard_title}`}>Total Events</h2>
+            <h2 className={`${pageStyle.__StatsCard_title}`}>Events <MdEmojiEvents className={`${pageStyle.__StatsCard_ICON}`} /></h2>
             <h3 className={`${pageStyle.__StatsCard_stats}`}>{statsData?.totalEvents}</h3>
           </div>
 
           <div className={`${pageStyle.__StatsCard}`}>
-            <MdEmojiEvents className={`${pageStyle.__StatsCard_ICON}`} />
-            <h2 className={`${pageStyle.__StatsCard_title}`}>Past Events</h2>
+            <h2 className={`${pageStyle.__StatsCard_title}`}>Past Events <MdEmojiEvents className={`${pageStyle.__StatsCard_ICON}`} /></h2>
             <h3 className={`${pageStyle.__StatsCard_stats}`}>{statsData?.totalPastEvents}</h3>
           </div>
 
           <div className={`${pageStyle.__StatsCard}`}>
-            <MdEmojiEvents className={`${pageStyle.__StatsCard_ICON}`} />
-            <h2 className={`${pageStyle.__StatsCard_title}`}>Upcomming Events</h2>
+            <h2 className={`${pageStyle.__StatsCard_title}`}>Upcoming Events <MdEmojiEvents className={`${pageStyle.__StatsCard_ICON}`} /></h2>
             <h3 className={`${pageStyle.__StatsCard_stats}`}>{statsData?.totalUpcomingEvents}</h3>
           </div>
 
           <div className={`${pageStyle.__StatsCard}`}>
-            <GiTicket className={`${pageStyle.__StatsCard_ICON}`} />
-            <h2 className={`${pageStyle.__StatsCard_title}`}> Total Ticket sales</h2>
+            <h2 className={`${pageStyle.__StatsCard_title}`}> Sold Tickets <GiTicket className={`${pageStyle.__StatsCard_ICON}`} /></h2>
             <h3 className={`${pageStyle.__StatsCard_stats}`}>{statsData?.totalTicketSales}</h3>
           </div>
 
           <div className={`${pageStyle.__StatsCard}`}>
-            <LiaRupeeSignSolid className={`${pageStyle.__StatsCard_ICON}`} />
-            <h2 className={`${pageStyle.__StatsCard_title}`}> Total Income</h2>
+            <h2 className={`${pageStyle.__StatsCard_title}`}>Earning <FaDollarSign className={`${pageStyle.__StatsCard_ICON}`} /></h2>
             <h3 className={`${pageStyle.__StatsCard_stats}`}>{statsData?.totalIncome}</h3>
           </div>
 
           <div className={`${pageStyle.__StatsCard}`}>
-            <LiaRupeeSignSolid className={`${pageStyle.__StatsCard_ICON}`} />
-            <h2 className={`${pageStyle.__StatsCard_title}`}> Total Audience</h2>
+            <h2 className={`${pageStyle.__StatsCard_title}`}>Audience <HiUserGroup className={`${pageStyle.__StatsCard_ICON}`} /></h2>
             <h3 className={`${pageStyle.__StatsCard_stats}`}>{statsData?.registeredUsers}</h3>
           </div>
 

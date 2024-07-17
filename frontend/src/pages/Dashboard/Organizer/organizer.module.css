@@ -112,14 +112,17 @@
     width: 100%;
     min-height: 100%;
     padding: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .__statsBox {
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(275px, 275px));
+    grid-template-columns: repeat(3, 225px);
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
     gap: 20px;
 }
 
@@ -129,33 +132,39 @@
     width: 100%;
     height: 145px;
     display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
+    padding: 0.6em 0.8em;
+    margin-bottom: 2em;
 }
 
 .__StatsCard_ICON {
-    font-size: 40px;
+    font-size: 25px;
     color: var(--primaryColor);
-
 }
 
 .__StatsCard_title {
     font-size: 20px;
-    font-weight: 600;
+    font-weight: 500;
     color: var(--secondaryColor);
     text-transform: capitalize;
     width: 100%;
-    text-align: center;
-
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
 }
 
 .__StatsCard_stats {
     width: 100%;
     text-align: center;
-    font-size: 25px;
+    font-size: 30px;
     color: var(--primaryColor);
+    height: calc(100% - 40px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
 }
 
@@ -198,7 +207,8 @@
     align-items: center;
     justify-content: space-between;
 }
-.__priceInfoMsg{
+
+.__priceInfoMsg {
     margin-left: 10px;
     font-size: 15px;
     font-weight: 600;
@@ -207,8 +217,9 @@
     align-items: center;
     text-transform: capitalize;
     justify-content: center;
-    gap:3px;
+    gap: 3px;
 }
+
 .input,
 .textarea {
     width: 100%;
@@ -357,8 +368,8 @@
 }
 
 @media screen and (max-width: 1200px) {
-    .__allEventsContainer{
-        justify-content: center;
+    .__statsBox {
+        grid-template-columns: repeat(2, 225px);
     }
 }
 
@@ -399,9 +410,78 @@
     }
 }
 
+@media screen and (max-width: 561px) {
+    .__dashboardLOGO {
+        display: none;
+    }
+
+    .__organizerDashboardContainer {
+        flex-direction: column-reverse;
+    }
+
+    .__DashboardContainer__sidebar {
+        width: 100%;
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-right: 0.8em;
+    }
+
+    .__dashboard_navbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        padding: 0;
+        margin: 0;
+        border: none;
+        height: 100%;
+        width: calc(100% - 60px)
+    }
+
+    .__navItems,
+    .__logoutButton {
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        margin: 0;
+        padding: 0.8em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .__logoutButton {
+        padding: 0;
+        width: 55px;
+        height: 55px;
+    }
+
+    .__navItemsICON {
+        font-size: 20px;
+    }
+
+    .__outletcontainer {
+        border: 2px solid blue;
+        width: 100%;
+        height: calc(100dvh - 80px);
+    }
+    .__allEventsContainer {
+        grid-template-columns: repeat(auto-fit, minmax(100%, 100%));
+        padding: 2em 0.4em;
+    }
+}
+
+@media screen and (max-width: 490px) {
+    .__statsBox {
+        grid-template-columns: repeat(1, 225px);
+    }
+}
+
+
 @media (max-width: 480px) {
     .container {
-        padding: 15px;
+        padding: 15px 10px;
     }
 
     .input,
