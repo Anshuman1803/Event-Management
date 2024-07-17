@@ -49,10 +49,12 @@ function ALLEvents() {
       .then((response) => {
         if (response.data.success) {
           setAllEvents(response.data.eventData);
-          // setLoading(false);
+          setFilterEvents(response.data.eventData);
+          setLoading(false);
         } else {
           setAllEvents(response.data.eventData);
-          // setLoading(false);
+          setFilterEvents(response.data.eventData);
+          setLoading(false);
         }
       })
       .catch((error) => {
