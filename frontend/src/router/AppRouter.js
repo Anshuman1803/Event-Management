@@ -12,7 +12,6 @@ const OrganizerDashboard = lazy(() => import("../pages/Dashboard/Organizer/Organ
 const Profile = lazy(() => import("../pages/Dashboard/Organizer/Profile.js"))
 const CreateEvent = lazy(() => import("../pages/Dashboard/Organizer/CreateEvent.js"))
 const AllEvent = lazy(() => import("../pages/Dashboard/Organizer/ALLEvents.js"))
-const Setting = lazy(() => import("../pages/Dashboard/Organizer/Setting.js"));
 
 const EventDetails = lazy(()=> import("../components/EventDetails/EventDetails.js"))
 
@@ -46,8 +45,6 @@ function Organizer() {
                 <Route path='/create-events' element={<Suspense fallback={<LazyLoader/>}> <CreateEvent /> </Suspense>} />
 
                 <Route path='/all-events' element={<Suspense fallback={<LazyLoader/>}> <AllEvent /> </Suspense>} />
-
-                <Route path='/setting' element={<Suspense fallback={<LazyLoader/>}> <Setting /> </Suspense>} />
 
                 <Route path='/event/:type/:id' element={<Suspense fallback={<LazyLoader/>}> <EventDetails /> </Suspense>} />
 
