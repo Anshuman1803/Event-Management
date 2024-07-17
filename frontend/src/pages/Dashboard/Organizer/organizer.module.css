@@ -278,12 +278,34 @@
 
 /*! All Events Sections  */
 .__allEventsContainer {
+    position: relative;
+    width: 100%;
+    /* border: 2px solid red; */
+    min-height: 100%;
+}
+
+.__audienceEventcard_Box {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(375px, 375px));
-    justify-content: start;
+    justify-content: center;
     align-items: center;
     gap: 20px;
     padding: 2em;
+}
+.__noEvents{
+    padding: 0.8em;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 35px;
+    background: linear-gradient(to top, #1e3c72 0%, #1e3c72 1%, #2a5298 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    width: 100%;
+    height:420px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .__eventsCard {
@@ -466,7 +488,8 @@
         width: 100%;
         height: calc(100dvh - 80px);
     }
-    .__allEventsContainer {
+
+    .__audienceEventcard_Box {
         grid-template-columns: repeat(auto-fit, minmax(100%, 100%));
         padding: 2em 0.4em;
     }
@@ -502,5 +525,8 @@
     .location,
     .description {
         font-size: 0.8em;
+    }
+    .__noEvents {
+        font-size: 28px;
     }
 }

@@ -12,7 +12,6 @@
     justify-content: center;
     border-bottom: 1px solid rgba(128, 128, 128, 0.172);
 }
-
 .searchInput {
     width: 60%;
     padding: 10px 15px;
@@ -25,8 +24,8 @@
 
 .searchInput:focus {
     outline: none;
-    border-color: #007bff;
-    box-shadow: 0 0 0 2px rgba(0, 123, 255, .25);
+    border-color: #4169e1;
+    box-shadow: 0 0 0 2px #4169e186;
 }
 
 @media screen and (max-width: 769px) {

@@ -25,7 +25,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(345px, 345px));
     align-items: center;
-    justify-content: start;
+    justify-content: center;
     column-gap: 20px;
     padding: 1em 1.5em;
 }
@@ -158,15 +158,6 @@
 .__eventCreatedAt{
     font-size: 14px;
     font-weight: 700;
-}
-
-
-@media screen and (max-width: 1200px) {
-
-    .__audienceEventcard_Box,
-    .__audienceEventcard_secondaryBOX {
-        justify-content: center;
-    }
 }
 
 @media screen and (max-width: 370px) {

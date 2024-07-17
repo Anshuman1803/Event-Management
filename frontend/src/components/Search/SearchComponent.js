@@ -2,10 +2,10 @@
 import React from 'react';
 import searchStyle from './search.module.css';
 
-const SearchComponent = ({ searchTerm, setSearchTerm, placeholder }) => {
+const SearchComponent = ({ searchTerm, setSearchTerm,placeholder, customClass}) => {
 
   return (
-    <div className={searchStyle.searchContainer}>
+    <div className={`${searchStyle.searchContainer} ${customClass}`}>
       <input
         type="text"
         id='searchInput'
