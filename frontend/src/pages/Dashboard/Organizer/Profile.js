@@ -17,6 +17,12 @@ function Profile() {
     axios.get(`${BACKEND_URL}events/calculate-user-stats/${userID}`).then((response) => {
       if (response.data.success) {
         setStatsData(response.data.statsData);
+//         totalEvents
+// totalUpcomingEvents
+// totalPastEvents
+// totalTicketSales
+// totalIncome
+// registeredUsers
         setLoading(false);
       } else {
         setStatsData(response.data.statsData);
@@ -36,31 +42,37 @@ function Profile() {
           <div className={`${pageStyle.__StatsCard}`}>
             <MdEmojiEvents className={`${pageStyle.__StatsCard_ICON}`} />
             <h2 className={`${pageStyle.__StatsCard_title}`}>Total Events</h2>
-            <h3 className={`${pageStyle.__StatsCard_stats}`}>{statsData?.TotalEvent}</h3>
+            <h3 className={`${pageStyle.__StatsCard_stats}`}>{statsData?.totalEvents}</h3>
           </div>
 
           <div className={`${pageStyle.__StatsCard}`}>
             <MdEmojiEvents className={`${pageStyle.__StatsCard_ICON}`} />
             <h2 className={`${pageStyle.__StatsCard_title}`}>Past Events</h2>
-            <h3 className={`${pageStyle.__StatsCard_stats}`}>{statsData?.PastEvents}</h3>
+            <h3 className={`${pageStyle.__StatsCard_stats}`}>{statsData?.totalPastEvents}</h3>
           </div>
 
           <div className={`${pageStyle.__StatsCard}`}>
             <MdEmojiEvents className={`${pageStyle.__StatsCard_ICON}`} />
             <h2 className={`${pageStyle.__StatsCard_title}`}>Upcomming Events</h2>
-            <h3 className={`${pageStyle.__StatsCard_stats}`}>{statsData?.UpcomingEvents}</h3>
+            <h3 className={`${pageStyle.__StatsCard_stats}`}>{statsData?.totalUpcomingEvents}</h3>
           </div>
 
           <div className={`${pageStyle.__StatsCard}`}>
             <GiTicket className={`${pageStyle.__StatsCard_ICON}`} />
             <h2 className={`${pageStyle.__StatsCard_title}`}> Total Ticket sales</h2>
-            <h3 className={`${pageStyle.__StatsCard_stats}`}>0</h3>
+            <h3 className={`${pageStyle.__StatsCard_stats}`}>{statsData?.totalTicketSales}</h3>
           </div>
 
           <div className={`${pageStyle.__StatsCard}`}>
             <LiaRupeeSignSolid className={`${pageStyle.__StatsCard_ICON}`} />
             <h2 className={`${pageStyle.__StatsCard_title}`}> Total Income</h2>
-            <h3 className={`${pageStyle.__StatsCard_stats}`}>0</h3>
+            <h3 className={`${pageStyle.__StatsCard_stats}`}>{statsData?.totalIncome}</h3>
+          </div>
+
+          <div className={`${pageStyle.__StatsCard}`}>
+            <LiaRupeeSignSolid className={`${pageStyle.__StatsCard_ICON}`} />
+            <h2 className={`${pageStyle.__StatsCard_title}`}> Total Audience</h2>
+            <h3 className={`${pageStyle.__StatsCard_stats}`}>{statsData?.registeredUsers}</h3>
           </div>
 
         </div>

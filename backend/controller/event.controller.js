@@ -42,17 +42,18 @@ const eventRegistration = async (request, response) => {
       PurchaseDate: Date.now(),
     });
     if (newRegistration) {
-
-      await eventCollection.updateOne({ _id: EventID }, {
-        $addToSet: { registeredUser: UserID },
-        $inc: { soldTickets: QuantityofTickets },
-      })
+      await eventCollection.updateOne(
+        { _id: EventID },
+        {
+          $addToSet: { registeredUser: UserID },
+          $inc: { soldTickets: QuantityofTickets },
+        }
+      );
 
       response.status(201).json({
         success: true,
         resMsg: "User registered for the event successfully",
       });
-
     } else {
       response.json({
         success: false,
@@ -72,56 +73,46 @@ const eventRegistration = async (request, response) => {
 const calculateStats = async (request, response) => {
   try {
     const { organizer } = request.params;
-    const statsData = await eventCollection.aggregate([
+    const statsData = {
+      totalEvents: 0,
+      totalUpcomingEvents: 0,
+      totalPastEvents: 0,
+      totalTicketSales: 0,
+      totalIncome: 0,         
+      registeredUsers: 0,
+
+    };
+    const upcomingEvents = [];
+    const pastEvents = [];
+    const currentDate = new Date();
+    const allEvents = await eventCollection.aggregate([
       {
         $match: { organizer: new Mongoose.Types.ObjectId(organizer) },
       },
-      {
-        $addFields: {
-          eventDateTime: {
-            $dateFromString: {
-              dateString: {
-                $concat: [{ $dateToString: { format: "%Y-%m-%d", date: "$date" } }, "T", "$time", ":00"],
-              },
-            },
-          },
-        },
-      },
-      {
-        $group: {
-          _id: null,
-          TotalEvent: { $sum: 1 },
-          UpcomingEvents: {
-            $sum: {
-              $cond: [{ $gt: ["$eventDateTime", new Date()] }, 1, 0],
-            },
-          },
-          PastEvents: {
-            $sum: {
-              $cond: [{ $lt: ["$eventDateTime", new Date()] }, 1, 0],
-            },
-          },
-        },
-      },
-      {
-        $project: {
-          _id: 0,
-          TotalEvent: 1,
-          UpcomingEvents: 1,
-          PastEvents: 1,
-        },
-      },
     ]);
 
-    if (statsData.length > 0) {
+    statsData.totalEvents = allEvents.length;
+    allEvents.forEach((event) => {
+      const eventDate = new Date(event.date);
+      statsData.totalTicketSales = statsData.totalTicketSales + event.soldTickets;
+      statsData.totalIncome = statsData.totalIncome + (event.ticketPrice * event.soldTickets);
+      statsData.registeredUsers = statsData.registeredUsers + event.registeredUser.length;
+      if (eventDate > currentDate) {
+        statsData.totalUpcomingEvents = statsData.totalUpcomingEvents + 1;
+      } else {
+        statsData.totalPastEvents = statsData.totalPastEvents + 1;
+      }
+    });
+
+    if (allEvents.length > 0) {
       return response.status(200).json({
         success: true,
-        statsData: statsData[0],
+        statsData : statsData
       });
     } else {
       return response.status(404).json({
         success: false,
-        statsData: statsData[0],
+        statsData : statsData,
         resMsg: "No events found",
       });
     }
@@ -165,7 +156,7 @@ const getAllEvents = async (request, response) => {
           ticketQuantity: 1,
           isPrivate: 1,
           createdAt: 1,
-          soldTickets : 1,
+          soldTickets: 1,
           "organizer._id": 1,
           "organizer.fullName": 1,
           "organizer.profile": 1,
@@ -223,8 +214,8 @@ const getEventdata = async (request, response) => {
           ticketQuantity: 1,
           isPrivate: 1,
           createdAt: 1,
-          soldTickets : 1,
-          registeredUser : 1,
+          soldTickets: 1,
+          registeredUser: 1,
           "organizer._id": 1,
           "organizer.fullName": 1,
           "organizer.profile": 1,
@@ -286,8 +277,8 @@ const getEvents = async (request, response) => {
           ticketQuantity: 1,
           isPrivate: 1,
           createdAt: 1,
-          soldTickets : 1,
-          registeredUser : 1,
+          soldTickets: 1,
+          registeredUser: 1,
           "organizer._id": 1,
           "organizer.fullName": 1,
           "organizer.profile": 1,
@@ -316,7 +307,7 @@ const getEvents = async (request, response) => {
         resMsg: "No events found",
         upcomingEvents: upcomingEvents,
         pastEvents: pastEvents,
-       });
+      });
     }
   } catch (error) {
     return response.status(500).json({

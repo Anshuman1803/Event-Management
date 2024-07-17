@@ -61,7 +61,9 @@ function ALLEvents() {
                     {events?.ticketPrice}
                   </span>
                   <span className={styles.availability}>
-                    {events?.ticketQuantity > 0 ? `${events?.ticketQuantity} tickets left` : "Sold Out"}
+                  {events?.soldTickets <= events?.ticketQuantity
+                            ? `${events?.ticketQuantity - events?.soldTickets} tickets left`
+                            : "Sold Out"}
                   </span>
                 </div>
                 {events?.isPrivate && <span className={styles.privateTag}>Private</span>}
