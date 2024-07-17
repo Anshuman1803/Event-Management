@@ -36,6 +36,8 @@ const handleRegisterButtonClick  = (e)=>{
           setLoading(false);
           if (response.data.success) {
             setEventData(response.data.eventData);
+          }else{
+            setLoading(false);
           }
         })
         .catch((error) => {
@@ -89,7 +91,7 @@ const handleRegisterButtonClick  = (e)=>{
           <hr/>
 
           {
-            (type !== "PastEvent" && type !== "UpcomingEvent") && <RegisteredUser registrations={data?.registeredUser}/>
+            (type !== "PastEvent" && type !== "UpcomingEvent" && type !== "Registered-Events")  && <RegisteredUser registrations={data?.registeredUserDetails}/>
           }
          <div className={pageStyle.__buttoncontainer}>
          <button type="button" className={pageStyle.__BackButton} onClick={handleBackbuttonClick}>Back</button>

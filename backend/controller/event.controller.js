@@ -110,7 +110,7 @@ const calculateStats = async (request, response) => {
         statsData : statsData
       });
     } else {
-      return response.status(404).json({
+      return response.json({
         success: false,
         statsData : statsData,
         resMsg: "No events found",
@@ -207,7 +207,7 @@ const getEventdata = async (request, response) => {
           from: "eventregistrations",
           localField: "_id",
           foreignField: "EventID",
-          as: "registeredUser",
+          as: "registeredUserDetails",
           pipeline: [
             {
               $lookup: {
@@ -250,12 +250,12 @@ const getEventdata = async (request, response) => {
           isPrivate: 1,
           createdAt: 1,
           soldTickets: 1,
-          "registeredUser.phone": 1,
-          "registeredUser.QuantityofTickets": 1,
-          "registeredUser.TotalPricePaid": 1,
-          "registeredUser.PurchaseDate": 1,
-          "registeredUser.email": 1,
-          "registeredUser.fullName": 1,
+          "registeredUserDetails.phone": 1,
+          "registeredUserDetails.QuantityofTickets": 1,
+          "registeredUserDetails.TotalPricePaid": 1,
+          "registeredUserDetails.PurchaseDate": 1,
+          "registeredUserDetails.email": 1,
+          "registeredUserDetails.fullName": 1,
           "organizer._id": 1,
           "organizer.fullName": 1,
           "organizer.profile": 1,
@@ -286,10 +286,6 @@ const getEventdata = async (request, response) => {
 //! Get all the events for audience
 const getEvents = async (request, response) => {
   try {
-    const currentDate = new Date();
-    const upcomingEvents = [];
-    const pastEvents = [];
-
     const allData = await eventCollection.aggregate([
       {
         $match: {},
@@ -326,27 +322,16 @@ const getEvents = async (request, response) => {
       },
     ]);
 
-    allData.forEach((event) => {
-      const eventDate = new Date(event.date);
-      if (eventDate > currentDate) {
-        upcomingEvents.push(event);
-      } else {
-        pastEvents.push(event);
-      }
-    });
-
     if (allData.length > 0) {
       return response.status(200).json({
         success: true,
-        upcomingEvents: upcomingEvents,
-        pastEvents: pastEvents,
+        allData : allData
       });
     } else {
       return response.status(404).json({
         success: false,
         resMsg: "No events found",
-        upcomingEvents: upcomingEvents,
-        pastEvents: pastEvents,
+        allData : allData
       });
     }
   } catch (error) {
