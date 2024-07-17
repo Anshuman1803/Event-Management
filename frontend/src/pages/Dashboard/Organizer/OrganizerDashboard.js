@@ -5,7 +5,6 @@ import { useDispatch } from 'react-redux'
 import { UserLoggedOut } from '../../../redux/ReduxSlice'
 import LOGO from "../../../assets/LOGO.png"
 import { FaUser } from "react-icons/fa";
-import { IoIosSettings } from "react-icons/io";
 import { MdOutlineEventAvailable } from "react-icons/md";
 import { IoIosCreate } from "react-icons/io";
 import { IoLogOut } from "react-icons/io5";
@@ -49,13 +48,6 @@ function OrganizerDashboard() {
                         <MdOutlineEventAvailable className={`${pageStyle.__navItemsICON}`} />
                         <span className={`${pageStyle.__navItemsText}`}>Events</span>
                     </NavLink>
-
-
-                    <NavLink title='Setting' to={"/setting"} className={({ isActive }) => (isActive ? `${pageStyle.__navItems} ${pageStyle.active}` : `${pageStyle.__navItems}`)}>
-                        <IoIosSettings  className={`${pageStyle.__navItemsICON}`} />
-                        <span className={`${pageStyle.__navItemsText}`}>Setting</span>
-                    </NavLink>
-
                 </nav>
 
                 <button onClick={handleLogOutClick} title='Log Out' className={`${pageStyle.__logoutButton}`}>
