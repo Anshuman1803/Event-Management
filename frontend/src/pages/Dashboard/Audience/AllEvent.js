@@ -51,7 +51,7 @@ function AllEvent() {
                 {allEvents?.map((events) => {
                   return (
                     <article
-                      onClick={() => handleCardClick("UpcomingEvent", events._id)}
+                      onClick={() => handleCardClick("event", events._id)}
                       key={events._id}
                       className={pageStyle.__audience_EventCards}
                     >

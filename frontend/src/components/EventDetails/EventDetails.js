@@ -17,6 +17,7 @@ function EventDetails() {
   const [data, setEventData] = useState({});
   const [ToggleRegistration, setToggleRegistration] = useState(false)
   const { type, id } = useParams();
+  const currentDate = new Date();;
 
 const handleBackbuttonClick = (e)=>{
     e.preventDefault();
@@ -91,21 +92,21 @@ const handleRegisterButtonClick  = (e)=>{
           <hr/>
 
           {
-            (type !== "PastEvent" && type !== "UpcomingEvent" && type !== "Registered-Events")  && <RegisteredUser registrations={data?.registeredUserDetails}/>
+            (type !== "event")  && <RegisteredUser registrations={data?.registeredUserDetails}/>
           }
          <div className={pageStyle.__buttoncontainer}>
          <button type="button" className={pageStyle.__BackButton} onClick={handleBackbuttonClick}>Back</button>
          
-         {
-            type === "PastEvent" && <p className={pageStyle.__RegistrationCLosed}>Registration Closed</p>
-         }
-        
         {
-            (type === "UpcomingEvent" && !data?.registeredUser?.includes(userID)) &&  <button type="button" className={pageStyle.__EventRegisterButton} onClick={handleRegisterButtonClick}>Register Now</button>
+          new Date(data?.date) < currentDate &&<p className={pageStyle.__RegistrationCLosed}>Registration Closed</p>
         }
+
+        {
+            (new Date(data?.date) > currentDate && !data?.registeredUser?.includes(userID) && type ==="event") &&  <button type="button" className={pageStyle.__EventRegisterButton} onClick={handleRegisterButtonClick}>Register Now</button>
+        }
+
         {
             (data?.registeredUser?.includes(userID)) &&  <p className={pageStyle.__RegistrationCLosed}>Already Registered</p>
-
         }
          </div>
         </>
