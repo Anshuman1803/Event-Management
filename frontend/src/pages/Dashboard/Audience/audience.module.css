@@ -147,7 +147,12 @@
     font-size: 20px;
     background-color: #284ebe1f;
     text-transform: uppercase;
-
+}
+.__userProfilePICTURE{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 .__userINFO_fullName {

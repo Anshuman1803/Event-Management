@@ -2,6 +2,7 @@ import React, { lazy, Suspense } from 'react';
 import { Routes, Route } from "react-router-dom"
 import { useSelector } from 'react-redux';
 import LazyLoader from '../components/LazyLoader/LazyLoader.js';
+import GoogleCallback from '../pages/Auth/GoogleCallback.js';
 
 //! Auth components
 const Login = lazy(() => import("../pages/Auth/Login.js"));
@@ -73,6 +74,7 @@ function AuthRoute() {
     return <Routes>
         <Route path='/user/login' element={<Suspense fallback={<LazyLoader/>}> <Login /> </Suspense>} />
         <Route path='/user/register' element={<Suspense fallback={<LazyLoader/>}> <Register /> </Suspense>} />
-        <Route path='/' element={<Suspense fallback={<LazyLoader/>}> <Login /> </Suspense>} />
+        <Route path="/auth/google/callback" element={<GoogleCallback />} />
+        <Route path='/*' element={<Suspense fallback={<LazyLoader/>}> <Login /> </Suspense>} />
     </Routes>
 }

@@ -58,7 +58,8 @@ const handleRegisterButtonClick  = (e)=>{
           <p className={pageStyle.__EventDescription}>{data?.description}</p>
           <p className={pageStyle.__EventOrganizerDetails}>
             {data?.organizer?.profile ? (
-              <></>
+              <>
+              <img src={data?.organizer?.profile} alt="" className={pageStyle.__userProfilePICTURE} /></>
             ) : (
               <span className={pageStyle.__userInitials}>{data?.organizer?.fullName[0]}</span>
             )}

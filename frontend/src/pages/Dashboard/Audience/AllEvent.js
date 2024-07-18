@@ -105,7 +105,9 @@ function AllEvent() {
                       </div>
                       <div className={pageStyle.__EventCards__userINFO}>
                         {events?.organizer.profile ? (
-                          <></>
+                          <>
+                          <img src={events?.organizer.profile} alt="" className={pageStyle.__userProfilePICTURE}/>
+                          </>
                         ) : (
                           <span className={pageStyle.__userInitials}>{events?.organizer.fullName[0]}</span>
                         )}

@@ -169,6 +169,14 @@
 }
 
 
+.__userProfilePICTURE{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+
 @media screen and (max-width: 810px) {
     .__eventData_Container {
         width: 100%;

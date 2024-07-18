@@ -74,6 +74,12 @@ const Login = () => {
 
   const handleGoogleLogin = (e) => {
     // window.open(`http://localhost:5000/api/eventmanagement/v1/auth/google/callback`, "__self")
+    try {
+      const googleSignupUrl = `http://localhost:5000/auth/google?userType=${userDetails.role}`;
+      window.location.href = googleSignupUrl;
+    } catch (error) {
+      console.error("Google signup error:", error);
+    }
   };
 
   const togglePasswordVisibility = () => {
