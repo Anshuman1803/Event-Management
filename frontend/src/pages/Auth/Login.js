@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { updateUserData } from "../../redux/ReduxSlice";
 import ButtonLoader from "../../components/buttonLoader/ButtonLoader";
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const SECONDARY_BACKEND_URL = process.env.SECONDARY_BACKEND_URL;
 const Login = () => {
   const [Loading, setLoading] = useState(false);
   const dispatchTo = useDispatch();
@@ -75,7 +76,7 @@ const Login = () => {
   const handleGoogleLogin = (e) => {
     // window.open(`http://localhost:5000/api/eventmanagement/v1/auth/google/callback`, "__self")
     try {
-      const googleSignupUrl = `http://localhost:5000/auth/google?userType=${userDetails.role}`;
+      const googleSignupUrl = `${SECONDARY_BACKEND_URL}/auth/google?userType=${userDetails.role}`;
       window.location.href = googleSignupUrl;
     } catch (error) {
       console.error("Google signup error:", error);

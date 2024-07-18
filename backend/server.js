@@ -92,7 +92,7 @@ appServer.get("/auth/google", (req, res, next) => {
 appServer.get("/auth/google/callback", passport.authenticate("google"), (req, res) => {
   const user = req.user;
   res.redirect(
-    `http://localhost:3000/auth/google/callback?token=${user.token}&email=${user.email}&name=${user.fullName}&userType=${user.role}&userID=${user._id}&profile=${user.profile}`
+    `${process.env.FRONTEND_URL}/auth/google/callback?token=${user.token}&email=${user.email}&name=${user.fullName}&userType=${user.role}&userID=${user._id}&profile=${user.profile}`
   );
 });
 
