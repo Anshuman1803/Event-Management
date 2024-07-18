@@ -256,6 +256,7 @@ const getEventdata = async (request, response) => {
           "registeredUserDetails.PurchaseDate": 1,
           "registeredUserDetails.email": 1,
           "registeredUserDetails.fullName": 1,
+          "registeredUserDetails._id": 1,
           "organizer._id": 1,
           "organizer.fullName": 1,
           "organizer.profile": 1,
