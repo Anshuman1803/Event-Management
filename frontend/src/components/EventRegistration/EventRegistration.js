@@ -114,7 +114,7 @@ const EventRegistration = ({ CbCancle, ticketPrice, eventID }) => {
             Cancle
           </button>
           <button type="submit" className={`${styles.submitBtn} ${loading && "Unactive"}`}>
-            {loading ? <ButtonLoader /> : "Register"}
+            {loading ? <ButtonLoader /> : "Buy"}
           </button>
         </div>
       </form>

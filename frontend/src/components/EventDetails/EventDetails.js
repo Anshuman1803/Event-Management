@@ -102,7 +102,7 @@ const handleRegisterButtonClick  = (e)=>{
         }
 
         {
-            (new Date(data?.date) > currentDate && !data?.registeredUser?.includes(userID) && type ==="event") &&  <button type="button" className={pageStyle.__EventRegisterButton} onClick={handleRegisterButtonClick}>Register Now</button>
+            (new Date(data?.date) > currentDate && !data?.registeredUser?.includes(userID) && type ==="event") &&  <button type="button" className={pageStyle.__EventRegisterButton} onClick={handleRegisterButtonClick}>Buy Now</button>
         }
 
         {
