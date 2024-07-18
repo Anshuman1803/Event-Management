@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { updateUserData } from "../../redux/ReduxSlice";
 import ButtonLoader from "../../components/buttonLoader/ButtonLoader";
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-const SECONDARY_BACKEND_URL = process.env.SECONDARY_BACKEND_URL;
+const SECONDARY_BACKEND_URL = process.env.REACT_APP_SECONDARY_BACKEND_URL;
 const Login = () => {
   const [Loading, setLoading] = useState(false);
   const dispatchTo = useDispatch();
