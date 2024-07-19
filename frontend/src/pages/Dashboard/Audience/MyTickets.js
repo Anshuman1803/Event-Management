@@ -61,8 +61,8 @@ const MyTickets = () => {
                     </div>
                     <div className={styles.ticketContent}>
                       <div className={styles.userInfo}>
-                        {ticket.profile ? (
-                          <img src={ticket.profile} alt={ticket.fullName} className={styles.userImage} />
+                        {ticket?.profile ? (
+                          <img src={ticket?.profile} alt={ticket.fullName} className={styles.userImage} />
                         ) : (
                           <div className={styles.userImagePlaceholder}>{ticket.fullName.charAt(0)}</div>
                         )}

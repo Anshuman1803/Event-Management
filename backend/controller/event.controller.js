@@ -52,12 +52,12 @@ const eventRegistration = async (request, response) => {
 
       response.status(201).json({
         success: true,
-        resMsg: "User registered for the event successfully",
+        resMsg: "Ticket purchased successfully",
       });
     } else {
       response.json({
         success: false,
-        resMsg: "Failed to register the user for the event",
+        resMsg: "Failed to purchase",
       });
     }
   } catch (error) {
