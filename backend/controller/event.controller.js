@@ -374,20 +374,35 @@ const getTickets = async (request, response) => {
         $unwind: "$event",
       },
       {
+        $group: {
+          _id: "$event.title",
+          QuantityofTickets: { $sum: "$QuantityofTickets" },
+          TotalPricePaid: { $sum: "$TotalPricePaid" },
+          PurchaseDate: { $first: "$PurchaseDate" },
+          phone: { $first: "$phone" },
+          fullName: { $first: "$user.fullName" },
+          profile: { $first: "$user.profile" },
+          date: { $first: "$event.date" },
+          time: { $first: "$event.time" },
+        },
+      },
+  
+      {
         $project: {
+          _id: 1,
+          title: "$_id",
           QuantityofTickets: 1,
           TotalPricePaid: 1,
           PurchaseDate: 1,
-          phone : 1,
-          "user.fullName" : 1,
-          "user.profile" : 1,
-          "event.title" : 1,
-          "event.date" : 1,
-          "event.time" : 1,
+          phone: 1,
+          fullName: 1,
+          profile: 1,
+          date: 1,
+          time: 1,
         },
       },
     ]);
-
+  
     if (tickets.length > 0) {
       return response.status(200).json({
         success: true,

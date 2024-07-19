@@ -57,23 +57,23 @@ const MyTickets = () => {
                 return (
                   <article key={ticket._id} className={styles.ticket}>
                     <div className={styles.ticketHeader}>
-                      <h2>{ticket.event.title}</h2>
+                      <h2 className={styles.ticketTitle}>{ticket.title}</h2>
                     </div>
                     <div className={styles.ticketContent}>
                       <div className={styles.userInfo}>
-                        {ticket.user.profile ? (
-                          <img src={ticket.user.profile} alt={ticket.user.fullName} className={styles.userImage} />
+                        {ticket.profile ? (
+                          <img src={ticket.profile} alt={ticket.fullName} className={styles.userImage} />
                         ) : (
-                          <div className={styles.userImagePlaceholder}>{ticket.user.fullName.charAt(0)}</div>
+                          <div className={styles.userImagePlaceholder}>{ticket.fullName.charAt(0)}</div>
                         )}
                         <div className={styles.userDetails}>
-                          <div className={styles.userName}>{ticket.user.fullName}</div>
+                          <div className={styles.userName}>{ticket.fullName}</div>
                           <div className={styles.userPhone}>{ticket.phone}</div>
                         </div>
                       </div>
                       <div className={styles.ticketInfo}>
                         <span className={styles.ticketLabel}>Date & Time:</span>
-                        <span className={styles.ticketValue}> {new Date(ticket.event?.date).toLocaleDateString()} at {ticket.event?.time}</span>
+                        <span className={styles.ticketValue}> {new Date(ticket.date).toLocaleDateString()} at {ticket.time}</span>
                       </div>
                       <div className={styles.ticketDivider}></div>
                       <div className={styles.ticketInfo}>
