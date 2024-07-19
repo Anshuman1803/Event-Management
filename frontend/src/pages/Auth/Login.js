@@ -74,7 +74,7 @@ const Login = () => {
   };
 
   const handleGoogleLogin = (e) => {
-    // window.open(`http://localhost:5000/api/eventmanagement/v1/auth/google/callback`, "__self")
+    e.preventDefault();
     try {
       const googleSignupUrl = `${SECONDARY_BACKEND_URL}/auth/google?userType=${userDetails.role}`;
       window.location.href = googleSignupUrl;

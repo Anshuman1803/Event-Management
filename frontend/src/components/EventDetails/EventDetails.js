@@ -105,9 +105,6 @@ const handleRegisterButtonClick  = (e)=>{
         {
             (new Date(data?.date) > currentDate && !data?.registeredUserDetails?.some((data)=> data._id === userID) && type ==="event") &&  <button type="button" className={pageStyle.__EventRegisterButton} onClick={handleRegisterButtonClick}>Buy Now</button>
         }
-        {
-            (data?.registeredUserDetails?.some((data)=> data._id === userID)) &&  <p className={pageStyle.__RegistrationCLosed}>Already Registered</p>
-        }
          </div>
         </>
       )}
