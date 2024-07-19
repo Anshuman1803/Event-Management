@@ -8,10 +8,8 @@ import { FaLocationDot } from "react-icons/fa6";
 import { AiFillDollarCircle } from "react-icons/ai";
 import EventRegistration from "../EventRegistration/EventRegistration"
 import RegisteredUser from "../RegisteredUser/RegisteredUser";
-import { useSelector } from "react-redux";
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 function EventDetails() {
-  const { userID } = useSelector((state) => state.EventManagement);
   const navigateTO = useNavigate()
   const [Loading, setLoading] = useState(false);
   const [data, setEventData] = useState({});
@@ -103,7 +101,7 @@ const handleRegisterButtonClick  = (e)=>{
         }
 
         {
-            (new Date(data?.date) > currentDate && !data?.registeredUserDetails?.some((data)=> data._id === userID) && type ==="event") &&  <button type="button" className={pageStyle.__EventRegisterButton} onClick={handleRegisterButtonClick}>Buy Now</button>
+            (new Date(data?.date) > currentDate && type ==="event") &&  <button type="button" className={pageStyle.__EventRegisterButton} onClick={handleRegisterButtonClick}>Buy Now</button>
         }
          </div>
         </>
