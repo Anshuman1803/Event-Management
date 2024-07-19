@@ -50,8 +50,8 @@ function AllEvent() {
       .get(`${BACKEND_URL}events/get-event`)
       .then((response) => {
         if (response.data.success) {
-          setAllEvents(response.data.allData);
-          setFilterEvents(response.data.allData);
+          setAllEvents(response.data.allData.sort((a, b)=> b.createdAt - a.createdAt));
+          setFilterEvents(response.data.allData.sort((a, b)=> b.createdAt - a.createdAt));
           setLoading(false);
         } else {
           setFilterEvents([]);
