@@ -78,9 +78,8 @@ const calculateStats = async (request, response) => {
       totalUpcomingEvents: 0,
       totalPastEvents: 0,
       totalTicketSales: 0,
-      totalIncome: 0,         
+      totalIncome: 0,
       registeredUsers: 0,
-
     };
     const upcomingEvents = [];
     const pastEvents = [];
@@ -95,7 +94,7 @@ const calculateStats = async (request, response) => {
     allEvents.forEach((event) => {
       const eventDate = new Date(event.date);
       statsData.totalTicketSales = statsData.totalTicketSales + event.soldTickets;
-      statsData.totalIncome = statsData.totalIncome + (event.ticketPrice * event.soldTickets);
+      statsData.totalIncome = statsData.totalIncome + event.ticketPrice * event.soldTickets;
       statsData.registeredUsers = statsData.registeredUsers + event.registeredUser.length;
       if (eventDate > currentDate) {
         statsData.totalUpcomingEvents = statsData.totalUpcomingEvents + 1;
@@ -107,12 +106,12 @@ const calculateStats = async (request, response) => {
     if (allEvents.length > 0) {
       return response.status(200).json({
         success: true,
-        statsData : statsData
+        statsData: statsData,
       });
     } else {
       return response.json({
         success: false,
-        statsData : statsData,
+        statsData: statsData,
         resMsg: "No events found",
       });
     }
@@ -203,7 +202,7 @@ const getEventdata = async (request, response) => {
         $unwind: "$organizer",
       },
       {
-        $lookup :{
+        $lookup: {
           from: "eventregistrations",
           localField: "_id",
           foreignField: "EventID",
@@ -218,8 +217,9 @@ const getEventdata = async (request, response) => {
               },
             },
             {
-              $unwind : "$user"
-            },{
+              $unwind: "$user",
+            },
+            {
               $replaceRoot: {
                 newRoot: {
                   $mergeObjects: [
@@ -235,7 +235,7 @@ const getEventdata = async (request, response) => {
               },
             },
           ],
-        }
+        },
       },
       {
         $project: {
@@ -326,17 +326,82 @@ const getEvents = async (request, response) => {
     if (allData.length > 0) {
       return response.status(200).json({
         success: true,
-        allData : allData
+        allData: allData,
       });
     } else {
       return response.status(404).json({
         success: false,
         resMsg: "No events found",
-        allData : allData
+        allData: allData,
       });
     }
   } catch (error) {
     return response.status(500).json({
+      success: false,
+      resMsg: "Server failed to load! Try again.",
+      error: error.message,
+    });
+  }
+};
+
+const getTickets = async (request, response) => {
+  try {
+    const { userID } = request.params;
+    const tickets = await eventRegistrationCollection.aggregate([
+      {
+        $match: { UserID: new Mongoose.Types.ObjectId(userID) },
+      },
+      {
+        $lookup: {
+          from: "users",
+          localField: "UserID",
+          foreignField: "_id",
+          as: "user",
+        },
+      },
+      {
+        $unwind: "$user",
+      },
+      {
+        $lookup: {
+          from: "events",
+          localField: "EventID",
+          foreignField: "_id",
+          as: "event",
+        },
+      },
+      {
+        $unwind: "$event",
+      },
+      {
+        $project: {
+          QuantityofTickets: 1,
+          TotalPricePaid: 1,
+          PurchaseDate: 1,
+          phone : 1,
+          "user.fullName" : 1,
+          "user.profile" : 1,
+          "event.title" : 1,
+          "event.date" : 1,
+          "event.time" : 1,
+        },
+      },
+    ]);
+
+    if (tickets.length > 0) {
+      return response.status(200).json({
+        success: true,
+        tickets: tickets,
+      });
+    } else {
+      return response.status(404).json({
+        success: false,
+        resMsg: "No tickets found",
+        tickets: tickets,
+      });
+    }
+  } catch (error) {
+    response.status(500).json({
       success: false,
       resMsg: "Server failed to load! Try again.",
       error: error.message,
@@ -351,4 +416,5 @@ module.exports = {
   getAllEvents,
   getEventdata,
   getEvents,
+  getTickets,
 };

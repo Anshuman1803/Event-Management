@@ -3,7 +3,6 @@ import { Routes, Route } from "react-router-dom"
 import { useSelector } from 'react-redux';
 import LazyLoader from '../components/LazyLoader/LazyLoader.js';
 import GoogleCallback from '../pages/Auth/GoogleCallback.js';
-
 //! Auth components
 const Login = lazy(() => import("../pages/Auth/Login.js"));
 const Register = lazy(() => import("../pages/Auth/Register.js"));
@@ -18,6 +17,9 @@ const EventDetails = lazy(()=> import("../components/EventDetails/EventDetails.j
 
 // ! Audience Component
 const Events = lazy(()=>import("../pages/Dashboard/Audience/AllEvent.js"))
+const MyTickets = lazy(()=>import('../pages/Dashboard/Audience/MyTickets.js'));
+
+
 function AppRouter() {
     const { role } = useSelector((state) => state.EventManagement);
     return (
@@ -61,6 +63,7 @@ function Audience() {
     return (
         <Routes>
             <Route path='/' element={<Suspense fallback={<LazyLoader/>}> <Events /> </Suspense>} />
+            <Route path='/tickets' element={<Suspense fallback={<LazyLoader/>}> <MyTickets /> </Suspense>} />
 
             <Route path='/events/:type/:id' element={<Suspense fallback={<LazyLoader/>}> <EventDetails /> </Suspense>} />
 

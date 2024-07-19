@@ -25,6 +25,7 @@ export function Header() {
       <nav className={`${headerStyle.__appNavbar}`}>
 
         <NavLink to={"/"} className={({ isActive }) => (isActive ? `${headerStyle.__NavItems} ${headerStyle.active}` : `${headerStyle.__NavItems}`)}>Events</NavLink>
+        <NavLink to={"/tickets"} className={({ isActive }) => (isActive ? `${headerStyle.__NavItems} ${headerStyle.active}` : `${headerStyle.__NavItems}`)}>My Tickets</NavLink>
 
         <button onClick={handleLogOutClick} className={headerStyle.__logoutButton}><IoLogOut className={headerStyle.__logoutICON}/> Log out</button>
         

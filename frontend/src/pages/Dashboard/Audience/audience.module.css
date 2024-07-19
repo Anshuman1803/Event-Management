@@ -30,7 +30,6 @@
     padding: 1em 1.5em;
 }
 
-
 .__audience_EventCards {
     width: 100%;
     border-radius: 8px;
@@ -165,13 +164,102 @@
     font-weight: 700;
 }
 
+.ticket {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 100%;
+  }
+  
+  .ticketHeader {
+    background-color: #4a90e2;
+    color: white;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .ticketContent {
+    padding: 20px;
+  }
+  
+  .userInfo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .userImage {
+    width:55px;
+    height:55px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 15px;
+  }
+  
+  .userImagePlaceholder {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #4a90e2;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-right: 15px;
+  }
+  
+  .userDetails {
+    /* flex-grow: 1; */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center
+  }
+  
+  .userName {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .userPhone {
+    color: #666;
+    font-size: 0.9em;
+  }
+  
+  .ticketInfo {
+    margin-bottom: 10px;
+  }
+  
+  .ticketLabel {
+    font-weight: bold;
+    color: #555;
+  }
+  
+  .ticketValue {
+    float: right;
+  }
+  
+  .ticketDivider {
+    border-top: 1px dashed #ccc;
+    margin: 15px 0;
+  }
+  
+  @media screen and (max-width: 375px) {
+    .__audienceEventcard_secondaryBOX {
+        grid-template-columns: 1fr;
+    }
+  }
+
 @media screen and (max-width: 370px) {
     .__noEvents {
         font-size: 28px;
     }
 
-    .__audienceEventcard_Box,
-    .__audienceEventcard_secondaryBOX {
+    .__audienceEventcard_Box {
         display: grid;
         grid-template-columns: repeat(1, 100%);
         align-items: center;
