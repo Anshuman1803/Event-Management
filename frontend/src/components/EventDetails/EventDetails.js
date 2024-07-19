@@ -8,14 +8,20 @@ import { FaLocationDot } from "react-icons/fa6";
 import { AiFillDollarCircle } from "react-icons/ai";
 import EventRegistration from "../EventRegistration/EventRegistration"
 import RegisteredUser from "../RegisteredUser/RegisteredUser";
+import toast from "react-hot-toast";
+import { UserLoggedOut } from "../../redux/ReduxSlice";
+import { useDispatch, useSelector } from "react-redux";
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 function EventDetails() {
   const navigateTO = useNavigate()
+  const { token } = useSelector((state) => state.EventManagement);
   const [Loading, setLoading] = useState(false);
   const [data, setEventData] = useState({});
   const [ToggleRegistration, setToggleRegistration] = useState(false)
   const { type, id } = useParams();
-  const currentDate = new Date();;
+  const currentDate = new Date();
+  const dispatchTO = useDispatch();
+  const headers = { Authorization: `Bearer ${token}` };
 
 const handleBackbuttonClick = (e)=>{
     e.preventDefault();
@@ -30,7 +36,7 @@ const handleRegisterButtonClick  = (e)=>{
     if(!ToggleRegistration){
       setLoading(true);
       axios
-        .get(`${BACKEND_URL}events/get-event/${id}`)
+        .get(`${BACKEND_URL}events/get-event/${id}`,{headers})
         .then((response) => {
           setLoading(false);
           if (response.data.success) {
@@ -41,9 +47,22 @@ const handleRegisterButtonClick  = (e)=>{
         })
         .catch((error) => {
           setLoading(false);
+          if (error.response) {
+            if (error.response.status === 404) {
+              toast.error(error.response.data.resMsg);
+            } else if (error.response.status === 500) {
+              toast.error(error.response.data.resMsg);
+            } else if (error.response.status === 401) {
+              toast.error(error.response.data.resMsg);
+              dispatchTO(UserLoggedOut())
+            } else {
+              toast.error("An unexpected error occurred. Please try again later.");
+            }
+          }
         });
       }
       
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id,ToggleRegistration]);
   return (
     <section className={pageStyle.__DetailsPageContainer}>

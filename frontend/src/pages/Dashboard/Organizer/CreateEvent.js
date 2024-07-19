@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 import styles from './organizer.module.css';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import toast from "react-hot-toast"
 import ButtonLoader from "../../../components/buttonLoader/ButtonLoader"
 import { AiFillDollarCircle } from "react-icons/ai";
+import { UserLoggedOut } from '../../../redux/ReduxSlice';
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const CreateEvent = () => {
-  const { userID } = useSelector((state) => state.EventManagement);
+  const { userID,token} = useSelector((state) => state.EventManagement);
   const [loading, setLoading] = useState(false);
+  const dispatchTO = useDispatch();
+  const headers = { Authorization: `Bearer ${token}` };
   const [eventData, setEventData] = useState({
     organizer: userID,
     title: '',
@@ -46,7 +49,7 @@ const clearAllFields = ()=>{
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true)
-    axios.post(`${BACKEND_URL}events/create-new-events`, eventData).then((response) => {
+    axios.post(`${BACKEND_URL}events/create-new-events`, eventData,{headers}).then((response) => {
      if(response.data.success){
       toast.success(response.data.resMsg);
       clearAllFields();
@@ -59,7 +62,18 @@ const clearAllFields = ()=>{
     }).catch((error) => {
       clearAllFields();
       setLoading(false)
-      console.log(error)
+      if (error.response) {
+        if (error.response.status === 404) {
+          toast.error(error.response.data.resMsg);
+        } else if (error.response.status === 500) {
+          toast.error(error.response.data.resMsg);
+        } else if (error.response.status === 401) {
+          toast.error(error.response.data.resMsg);
+          dispatchTO(UserLoggedOut())
+        } else {
+          toast.error("An unexpected error occurred. Please try again later.");
+        }
+      }
     })
   };
 

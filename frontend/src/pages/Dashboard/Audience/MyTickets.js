@@ -1,19 +1,24 @@
 import React, { useEffect, useState } from "react";
 import styles from "./audience.module.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import toast from "react-hot-toast";
 import PageLoader from "../../../components/pageLoader/PageLoader";
+import { UserLoggedOut } from "../../../redux/ReduxSlice";
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 const MyTickets = () => {
-  const { userID } = useSelector((state) => state.EventManagement);
+  const { userID, token } = useSelector((state) => state.EventManagement);
   const [myTickets, setTickets] = useState([]);
   const [Loading, setLoading] = useState(false);
+  const dispatchTO = useDispatch();
+
+  const headers = { Authorization: `Bearer ${token}` };
+
   useEffect(() => {
     setLoading(true)
     axios
-      .get(`${BACKEND_URL}events/get-tickets/${userID}`)
+      .get(`${BACKEND_URL}events/get-tickets/${userID}`,{headers})
       .then((response) => {
         if (response.data.success) {
           setTickets(response.data.tickets);
@@ -28,11 +33,15 @@ const MyTickets = () => {
             setTickets(error.response.data.tickets);
           } else if (error.response.status === 500) {
             toast.error(error.response.data.resMsg);
+          }else if (error.response.status === 401) {
+            toast.error(error.response.data.resMsg);
+            dispatchTO(UserLoggedOut())
           } else {
             toast.error("An unexpected error occurred. Please try again later.");
           }
         }
       });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userID]);
   return (
     <section className={styles.__audienceAllEventsContainer}>

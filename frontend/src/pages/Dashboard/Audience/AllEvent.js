@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import pageStyle from "./audience.module.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { IoTime } from "react-icons/io5";
 import { FaLocationDot } from "react-icons/fa6";
@@ -9,15 +9,19 @@ import { useNavigate } from "react-router-dom";
 import PageLoader from "../../../components/pageLoader/PageLoader";
 import { CalculateTimeAgo } from "../../../utility/TimeAgo";
 import SearchComponent from "../../../components/Search/SearchComponent";
+import toast from "react-hot-toast";
+import { UserLoggedOut } from "../../../redux/ReduxSlice";
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 function AllEvent() {
   const navigateTO = useNavigate();
-  const { userID } = useSelector((state) => state.EventManagement);
+  const { userID, token } = useSelector((state) => state.EventManagement);
   const [allEvents, setAllEvents] = useState([]);
   const [filterEvents, setFilterEvents] = useState([]);
   const [Loading, setLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+  const dispatchTO = useDispatch();
+  const headers = { Authorization: `Bearer ${token}` };
 
   const handleCardClick = (type, eventID) => {
     navigateTO(`/events/${type}/${eventID}`);
@@ -47,7 +51,7 @@ function AllEvent() {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`${BACKEND_URL}events/get-event`)
+      .get(`${BACKEND_URL}events/get-event`,{headers})
       .then((response) => {
         if (response.data.success) {
           setAllEvents(response.data.allData.sort((a, b)=> b.createdAt - a.createdAt));
@@ -57,12 +61,25 @@ function AllEvent() {
           setFilterEvents([]);
           setAllEvents([]);
           setLoading(false);
+          
         }
       })
       .catch((error) => {
         setLoading(false);
-        console.log(error);
+        if (error.response) {
+          if (error.response.status === 404) {
+            toast.error(error.response.data.resMsg);
+          } else if (error.response.status === 500) {
+            toast.error(error.response.data.resMsg);
+          } else if (error.response.status === 401) {
+            toast.error(error.response.data.resMsg);
+            dispatchTO(UserLoggedOut())
+          } else {
+            toast.error("An unexpected error occurred. Please try again later.");
+          }
+        }
       });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userID]);
 
   return (

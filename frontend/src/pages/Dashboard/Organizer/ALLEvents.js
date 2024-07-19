@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import styles from "./organizer.module.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { IoTime } from "react-icons/io5";
 import { FaLocationDot } from "react-icons/fa6";
@@ -8,10 +8,15 @@ import { AiFillDollarCircle } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import PageLoader from "../../../components/pageLoader/PageLoader";
 import SearchComponent from "../../../components/Search/SearchComponent";
+import toast from "react-hot-toast";
+import { UserLoggedOut } from "../../../redux/ReduxSlice";
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 function ALLEvents() {
   const navigateTO = useNavigate();
-  const { userID } = useSelector((state) => state.EventManagement);
+  const dispatchTO = useDispatch();
+  const { userID,token } = useSelector((state) => state.EventManagement);
+  const headers = { Authorization: `Bearer ${token}` };
+
   const [allEvents, setAllEvents] = useState([]);
   const [filterEvents, setFilterEvents] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -45,7 +50,7 @@ function ALLEvents() {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`${BACKEND_URL}events/get-All-events/${userID}`)
+      .get(`${BACKEND_URL}events/get-All-events/${userID}`,{headers})
       .then((response) => {
         if (response.data.success) {
           setAllEvents(response.data.eventData);
@@ -58,9 +63,21 @@ function ALLEvents() {
         }
       })
       .catch((error) => {
-        console.log(error);
         setLoading(false);
+        if (error.response) {
+          if (error.response.status === 404) {
+            toast.error(error.response.data.resMsg);
+          } else if (error.response.status === 500) {
+            toast.error(error.response.data.resMsg);
+          } else if (error.response.status === 401) {
+            toast.error(error.response.data.resMsg);
+            dispatchTO(UserLoggedOut())
+          } else {
+            toast.error("An unexpected error occurred. Please try again later.");
+          }
+        }
       });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userID]);
 
   return (

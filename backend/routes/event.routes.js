@@ -1,12 +1,13 @@
 const eventRoute = require("express").Router();
 const { createNewEvent, getAllEvents, calculateStats, getEventdata, getEvents, eventRegistration, getTickets} = require("../controller/event.controller");
+const { userAuthenticate } = require("../middleware/Authenticate");
 
-eventRoute.post("/create-new-events", createNewEvent);
-eventRoute.post("/register-for-event", eventRegistration);
-eventRoute.get("/calculate-user-stats/:organizer", calculateStats);
-eventRoute.get("/get-All-events/:organizer", getAllEvents);
-eventRoute.get("/get-event/:eventID", getEventdata);
-eventRoute.get("/get-event", getEvents);
-eventRoute.get("/get-tickets/:userID", getTickets);
+eventRoute.post("/create-new-events",userAuthenticate, createNewEvent);
+eventRoute.post("/register-for-event",userAuthenticate, eventRegistration);
+eventRoute.get("/calculate-user-stats/:organizer",userAuthenticate, calculateStats);
+eventRoute.get("/get-All-events/:organizer",userAuthenticate, getAllEvents);
+eventRoute.get("/get-event/:eventID",userAuthenticate, getEventdata);
+eventRoute.get("/get-event",userAuthenticate, getEvents);
+eventRoute.get("/get-tickets/:userID",userAuthenticate, getTickets);
 
 module.exports = { eventRoute }

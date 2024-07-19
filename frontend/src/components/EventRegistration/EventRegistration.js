@@ -4,14 +4,18 @@ import styles from "./page.module.css";
 import ButtonLoader from "../buttonLoader/ButtonLoader";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { UserLoggedOut } from "../../redux/ReduxSlice";
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const EventRegistration = ({ CbCancle, ticketPrice, eventID }) => {
-  const { userID } = useSelector((state) => state.EventManagement);
+  const { userID, token } = useSelector((state) => state.EventManagement);
   const [quantity, setQuantity] = useState(1);
   const [totalPrice, setTotalPrice] = useState(0);
   const [phone, setPhone] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const dispatchTO = useDispatch();
+  const headers = { Authorization: `Bearer ${token}` };
 
   const clearFields = () => {
     setQuantity(1);
@@ -41,6 +45,8 @@ const EventRegistration = ({ CbCancle, ticketPrice, eventID }) => {
           EventID: eventID,
           QuantityofTickets: quantity,
           TotalPricePaid: totalPrice,
+        },{
+          headers
         })
         .then((response) => {
           if (response.data.success) {
@@ -56,7 +62,18 @@ const EventRegistration = ({ CbCancle, ticketPrice, eventID }) => {
         .catch((error) => {
           clearFields();
           setLoading(false);
-          console.log(error);
+          if (error.response) {
+            if (error.response.status === 404) {
+              toast.error(error.response.data.resMsg);
+            } else if (error.response.status === 500) {
+              toast.error(error.response.data.resMsg);
+            } else if (error.response.status === 401) {
+              toast.error(error.response.data.resMsg);
+              dispatchTO(UserLoggedOut())
+            } else {
+              toast.error("An unexpected error occurred. Please try again later.");
+            }
+          }
         });
     }
   };
