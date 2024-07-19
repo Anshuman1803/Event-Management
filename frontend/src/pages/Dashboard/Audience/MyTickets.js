@@ -17,7 +17,6 @@ const MyTickets = () => {
       .then((response) => {
         if (response.data.success) {
           setTickets(response.data.tickets);
-          setTickets([]);
         }
         setLoading(false);
       })
