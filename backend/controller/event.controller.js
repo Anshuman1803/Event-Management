@@ -81,8 +81,6 @@ const calculateStats = async (request, response) => {
       totalIncome: 0,
       registeredUsers: 0,
     };
-    const upcomingEvents = [];
-    const pastEvents = [];
     const currentDate = new Date();
     const allEvents = await eventCollection.aggregate([
       {
